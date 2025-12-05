@@ -71,16 +71,17 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       <div class="col" v-for="book in books" :key="book._id">
         <div class="card h-100 book-card">
+          <!-- ẢNH BÌA -->
           <div class="card-img-container">
             <img
-              :src="`${API_URL}/${
-                book.imagePath || 'uploads/default-book.jpg'
-              }`"
+              :src="getBookImage(book)"
               class="card-img-top"
               alt="Book cover"
               @error="handleImageError"
             />
           </div>
+
+          <!-- THÔNG TIN SÁCH -->
           <div class="card-body p-3">
             <h6 class="card-title">{{ book.tenSach }}</h6>
             <p class="card-text small mb-1">
@@ -90,8 +91,8 @@
               <strong>NXB:</strong> {{ book.maNXB?.tenNXB || "N/A" }}
             </p>
             <p class="card-text small mb-1">
-              <strong>Năm:</strong> {{ book.namXuatBan }}
-            </p>
+              <strong>Năm:</strong> {{ book.namXuatBan }}</p
+            >
             <p class="card-text small mb-1">
               <strong>Tác giả:</strong>
               {{ book.maTacGia?.tenTacGia || "Chưa có" }}
@@ -107,14 +108,16 @@
                   'text-warning fw-bold': book.soQuyen > 0 && book.soQuyen < 3,
                   'text-success': book.soQuyen >= 3,
                 }"
-                >{{ book.soQuyen }}</span
               >
+                {{ book.soQuyen }}
+              </span>
               <br />
               <small class="text-muted status-text" v-if="book.soQuyen < 3">
                 {{ book.soQuyen === 0 ? "Hết sách" : "Sắp hết" }}
               </small>
             </p>
           </div>
+
           <div class="card-footer p-3">
             <button
               class="btn btn-primary btn-sm w-100"
@@ -134,7 +137,6 @@
 import { ref, onMounted, computed, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
-import { showSuccess, showError } from "@/utils/notifications";
 
 export default {
   name: "BookList",
@@ -148,7 +150,10 @@ export default {
     const selectedBookId = ref(null);
     const showConfirmModal = ref(false);
     const store = useStore();
+
+    // URL backend, ví dụ: http://localhost:5000
     const API_URL = import.meta.env.VITE_API_IMAGE_URL;
+
     const allBooks = computed(() => store.getters["book/allBooks"]);
 
     const books = computed(() => {
@@ -170,13 +175,24 @@ export default {
       try {
         loading.value = true;
         await store.dispatch("book/fetchBooks");
-        // books.value = store.getters['book/allBooks'];
       } catch (err) {
         error.value = err.message;
         console.error("Error fetching books:", err);
       } finally {
         loading.value = false;
       }
+    };
+
+    // 👉 Tính URL ảnh đúng, xử lý cả 2 kiểu imagePath:
+    // "uploads/xxx.webp" hoặc "xxx.webp"
+    const getBookImage = (book) => {
+      if (book.imagePath) {
+        if (book.imagePath.startsWith("uploads/")) {
+          return `${API_URL}/${book.imagePath}`;
+        }
+        return `${API_URL}/uploads/${book.imagePath}`;
+      }
+      return `${API_URL}/uploads/default-book.jpg`;
     };
 
     const borrowBook = (bookId) => {
@@ -198,10 +214,10 @@ export default {
           "borrow/createBorrowRequest",
           selectedBookId.value
         );
-        proxy.$toast.show(
-          "Yêu cầu mượn sách đã được gửi. Vui lòng chờ quản lý duyệt!",
-          "success"
-        );
+      proxy.$toast.show(
+        "Yêu cầu mượn sách đã được gửi. Vui lòng chờ quản lý duyệt!",
+        "success"
+      );
         closeConfirmModal();
         await fetchBooks();
       } catch (error) {
@@ -238,6 +254,7 @@ export default {
       clearError,
       handleImageError,
       API_URL,
+      getBookImage,
     };
   },
 };
@@ -373,3 +390,4 @@ export default {
   opacity: 0.6;
 }
 </style>
+---
