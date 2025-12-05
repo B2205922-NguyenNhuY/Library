@@ -460,9 +460,10 @@ export default {
   box-sizing: border-box;
 }
 
+/* ==== BACKGROUND ==== */
 .register-background {
   min-height: 100vh;
-  background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+  background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -470,6 +471,7 @@ export default {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* ==== CONTAINER ==== */
 .register-box {
   display: flex;
   width: 100%;
@@ -477,13 +479,14 @@ export default {
   height: 650px;
   background: white;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 123, 191, 0.1);
+  box-shadow: 0 10px 30px rgba(67, 160, 71, 0.15);
   overflow: hidden;
 }
 
+/* ==== LEFT IMAGE ==== */
 .register-left {
   flex: 1;
-  background: linear-gradient(135deg, #81d4fa 0%, #4fc3f7 100%);
+  background: linear-gradient(135deg, #A5D6A7 0%, #66BB6A 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -500,6 +503,7 @@ export default {
   object-fit: contain;
 }
 
+/* ==== RIGHT FORM ==== */
 .register-right {
   flex: 1;
   padding: 25px 35px;
@@ -511,6 +515,7 @@ export default {
   position: relative;
 }
 
+/* TITLE */
 .register-title {
   text-align: center;
   margin-bottom: 20px;
@@ -519,7 +524,7 @@ export default {
 .register-title h1 {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #37474f;
+  color: #2E7D32;
   margin-bottom: 8px;
 }
 
@@ -529,6 +534,7 @@ export default {
   font-weight: 400;
 }
 
+/* FORM */
 .register-form {
   display: flex;
   flex-direction: column;
@@ -549,29 +555,30 @@ export default {
 .form-group label {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #546e7a;
+  color: #2E7D32;
   margin-bottom: 4px;
 }
 
 .required {
-  color: #f44336;
+  color: #d32f2f;
 }
 
+/* INPUT */
 .form-control {
   padding: 10px 12px;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #C8E6C9;
   border-radius: 8px;
   font-size: 0.9rem;
   transition: border-color 0.2s ease;
-  background: #fafafa;
-  color: #37474f;
+  background: #f9fef9;
+  color: #2E7D32;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #4fc3f7;
+  border-color: #43A047;
   background: white;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
 }
 
 .form-control.is-invalid {
@@ -579,22 +586,12 @@ export default {
   background: #ffebee;
 }
 
+/* PLACEHOLDER */
 .form-control::placeholder {
-  color: #a0aec0;
+  color: #9CCC65;
 }
 
-select.form-control {
-  cursor: pointer;
-}
-
-.password-group {
-  position: relative;
-}
-
-.password-input-wrapper {
-  position: relative;
-}
-
+/* PASSWORD ICON */
 .password-toggle {
   position: absolute;
   right: 8px;
@@ -610,16 +607,10 @@ select.form-control {
 }
 
 .password-toggle:hover {
-  color: #4fc3f7;
+  color: #43A047;
 }
 
-.error-message {
-  color: #f44336;
-  font-size: 0.8rem;
-  margin-top: 5px;
-  font-weight: 500;
-}
-
+/* ALERT */
 .alert {
   padding: 15px 20px;
   border-radius: 10px;
@@ -630,9 +621,9 @@ select.form-control {
 }
 
 .alert-error {
-  background: #ffebee;
-  color: #c62828;
-  border-left: 4px solid #ef5350;
+  background: #FFEBEE;
+  color: #C62828;
+  border-left: 4px solid #EF5350;
 }
 
 .alert-close {
@@ -647,8 +638,9 @@ select.form-control {
   font-weight: bold;
 }
 
+/* BUTTON */
 .btn-register {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -658,13 +650,13 @@ select.form-control {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 8px;
-  box-shadow: 0 2px 8px rgba(79, 195, 247, 0.3);
+  box-shadow: 0 2px 8px rgba(67, 160, 71, 0.3);
   width: 100%;
 }
 
 .btn-register:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 195, 247, 0.4);
+  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
 }
 
 .btn-register:active {
@@ -676,6 +668,7 @@ select.form-control {
   cursor: not-allowed;
 }
 
+/* LOGIN LINK */
 .login-link {
   text-align: center;
   margin-top: 20px;
@@ -684,12 +677,12 @@ select.form-control {
 }
 
 .login-link a {
-  color: #4fc3f7;
+  color: #43A047;
   font-weight: 600;
   text-decoration: none;
 }
 
 .login-link a:hover {
-  color: #29b6f6;
+  color: #2E7D32;
 }
 </style>

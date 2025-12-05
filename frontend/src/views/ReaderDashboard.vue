@@ -112,10 +112,10 @@
           <h5>Liên hệ</h5>
           <ul class="list-unstyled">
             <li><i class="fas fa-map-marker-alt me-2"></i> Đại học Cần Thơ</li>
-            <li><i class="fas fa-phone me-2"></i> 0911608752</li>
+            <li><i class="fas fa-phone me-2"></i> 0373163018</li>
             <li>
               <i class="fas fa-envelope me-2"></i>
-              hanb2207519@student.ctu.edu.vn
+              tranb2205917@student.ctu.edu.v
             </li>
           </ul>
           <div class="social-links mt-3">
@@ -123,12 +123,13 @@
             <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
             <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
             <a
-              href="https://github.com/spmcbth/B2207519_MachGiaHan_Library-Management.git"
+              href="https://github.com/MaiTranBaoTran/B2205917_MaiTranBaoTran_Library.git"
               ><i class="fab fa-github"></i>
             </a>
           </div>
         </div>
       </div>
+      
       <hr />
       <div class="row">
         <div class="col-md-12 text-center">
@@ -198,9 +199,9 @@ export default {
 </script>
 
 <style scoped>
-/* Navbar - màu nền và hiệu ứng hover giống admin */
+/* Navbar - màu nền xanh lá */
 .navbar {
-  background-color: #29b6f6;
+  background-color: #43A047;
   padding: 0.8rem 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -220,7 +221,7 @@ export default {
 }
 
 .navbar-nav .nav-link:hover {
-  color: #003c8f !important;
+  color: #E8F5E9 !important;
 }
 
 .navbar-nav .nav-link.active {
@@ -237,11 +238,11 @@ export default {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Footer - dùng tone màu xanh nhạt phù hợp */
+/* Footer xanh lá */
 .footer {
   margin-top: 60px;
-  background-color: #e1f5fe;
-  border-top: 1px solid #b3e5fc;
+  background-color: #E8F5E9;
+  border-top: 1px solid #C8E6C9;
   padding: 40px 0 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
@@ -250,7 +251,7 @@ export default {
 }
 
 .footer h5 {
-  color: #1976d2;
+  color: #1B5E20;
   font-weight: 600;
   margin-bottom: 20px;
   font-size: 1.1rem;
@@ -266,13 +267,13 @@ export default {
 }
 
 .footer a {
-  color: #37474f;
+  color: #2E7D32;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer a:hover {
-  color: #1976d2;
+  color: #1B5E20;
 }
 
 .footer i {
@@ -284,7 +285,7 @@ export default {
   border-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Social links - tone xanh đồng nhất */
+/* Social links - xanh lá */
 .social-links a {
   display: inline-block;
   width: 32px;
@@ -292,14 +293,14 @@ export default {
   line-height: 32px;
   text-align: center;
   border-radius: 50%;
-  background-color: #4fc3f7;
+  background-color: #66BB6A;
   color: white !important;
   margin-right: 10px;
   transition: background-color 0.3s, transform 0.3s;
 }
 
 .social-links a:hover {
-  background-color: #29b6f6;
+  background-color: #43A047;
   transform: translateY(-2px);
 }
 </style>

@@ -369,15 +369,18 @@ export default {
 </script>
 
 <style scoped>
+/* Modal overlay */
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Modal content */
 .modal-content {
   border-radius: 8px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* Input group */
 .input-group {
   max-width: 400px;
 }
@@ -386,9 +389,10 @@ export default {
   background-color: #ffffff;
   border-left: none;
   border-radius: 0 6px 6px 0;
-  color: #4fc3f7;
+  color: #2e7d32; /* xanh lá đậm */
 }
 
+/* Input field */
 .form-control {
   border-right: none;
   border-radius: 6px 0 0 6px;
@@ -396,28 +400,31 @@ export default {
 }
 
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66bb6a; /* xanh lá primary */
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
   outline: none;
 }
 
 .form-control:focus + .input-group-text {
-  border-color: #4fc3f7;
+  border-color: #66bb6a;
 }
 
+/* Button primary */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
   transition: all 0.2s ease;
   border-radius: 6px;
+  color: white;
 }
 
 .btn-primary:hover {
-  background: #29b6f6;
+  background: #43a047;
 }
 
+/* Button small */
 .btn-sm {
   border-radius: 4px;
 }
@@ -429,26 +436,26 @@ export default {
 }
 
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #e8f5e9;  /* nền xanh lá nhạt */
+  color: #2e7d32;             /* text xanh lá */
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f4faf5;
 }
 
 /* Label */
 .form-label {
   font-weight: 500;
-  color: #37474f;
+  color: #2e7d32; /* xanh lá đậm */
 }
 
-/* Alert & Modal titles */
+/* Titles */
 h2,
 .modal-title {
-  color: #37474f;
+  color: #2e7d32;
   font-weight: 600;
 }
 </style>

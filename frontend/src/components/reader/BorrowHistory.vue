@@ -356,108 +356,137 @@ export default {
 .card:hover {
   transform: translateY(-5px);
 }
+
+/* overlay modal */
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* table */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
+
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #E8F5E9;
+  color: #2E7D32;
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
 }
+
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f5faf6;
 }
+
+/* input group */
 .input-group {
   max-width: 500px;
 }
+
 .input-group-text {
   background-color: white;
   border-left: none;
-  color: #4fc3f7;
+  color: #43A047;
   border-radius: 0 6px 6px 0;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #A5D6A7;
   border-left: 0;
 }
+
 .form-control {
   border-right: none;
   border-radius: 6px 0 0 6px;
   font-size: 0.95rem;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #A5D6A7;
   transition: border-color 0.2s ease;
 }
+
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66BB6A;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
   outline: none;
 }
+
 .form-control:focus + .input-group-text {
-  border-color: #4fc3f7;
+  border-color: #66BB6A;
 }
+
+/* badge */
 .badge {
   font-size: 0.85em;
   padding: 0.4em 0.6em;
   border-radius: 6px;
   text-transform: capitalize;
 }
+
 .badge.bg-warning {
   background-color: #fff3cd;
   color: #856404;
 }
+
 .badge.bg-success {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #E8F5E9;
+  color: #2E7D32;
 }
+
 .badge.bg-danger {
   background-color: #f8d7da;
   color: #721c24;
 }
+
 .badge.bg-info {
   background-color: #d1ecf1;
   color: #0c5460;
 }
+
 .badge.bg-secondary {
-  background-color: #eceff1;
+  background-color: #eef3ef;
   color: #546e7a;
 }
+
+/* text */
 .text-danger {
   font-weight: bold;
   color: #dc3545 !important;
 }
+
 .text-warning {
   font-weight: bold;
-  color: #ffc107 !important;
+  color: #ffb300 !important;
 }
+
 .text-success {
   font-weight: bold;
-  color: #198754 !important;
+  color: #2E7D32 !important;
 }
+
 .text-muted {
   font-size: 0.85em;
   font-style: italic;
   color: #78909c;
 }
+
+/* button */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
   transition: all 0.2s ease;
   border-radius: 6px;
 }
+
 .btn-primary:hover {
-  background: #29b6f6;
+  background: #43A047;
 }
+
 .alert-warning {
   background-color: #fff3cd;
   border-color: #ffecb3;
   color: #856404;
 }
+
 .fw-bold {
   font-weight: bold !important;
 }

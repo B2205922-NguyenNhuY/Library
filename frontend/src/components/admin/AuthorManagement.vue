@@ -369,6 +369,7 @@ export default {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* Input Group */
 .input-group {
   max-width: 400px;
 }
@@ -377,7 +378,7 @@ export default {
   background-color: #ffffff;
   border-left: none;
   border-radius: 0 6px 6px 0;
-  color: #4fc3f7;
+  color: #43a047; /* icon xanh lá */
 }
 
 .form-control {
@@ -386,18 +387,20 @@ export default {
   font-size: 0.95rem;
 }
 
+/* Focus */
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.15);
   outline: none;
 }
 
 .form-control:focus + .input-group-text {
-  border-color: #4fc3f7;
+  border-color: #66bb6a;
 }
 
+/* BUTTON */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -406,28 +409,28 @@ export default {
 }
 
 .btn-primary:hover {
-  background: #29b6f6;
+  background: #43a047;
 }
 
 .btn-sm {
   border-radius: 4px;
 }
 
-/* Table style */
+/* TABLE */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
 
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #e8f5e9;
+  color: #2e7d32;
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f3faf4;
 }
 
 /* Label */
@@ -436,10 +439,10 @@ export default {
   color: #37474f;
 }
 
-/* Alert & Modal titles */
+/* Titles */
 h2,
 .modal-title {
-  color: #37474f;
+  color: #2e7d32;
   font-weight: 600;
 }
 </style>

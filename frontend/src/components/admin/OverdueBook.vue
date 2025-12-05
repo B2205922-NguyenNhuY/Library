@@ -355,10 +355,12 @@ Thư viện`;
   padding: 20px 0;
 }
 
+/* Card */
 .card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  border: 1px solid #e8f5e9; /* viền xanh lá nhạt */
 }
 
 .card:hover {
@@ -366,46 +368,67 @@ Thư viện`;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Table */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
+
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #e8f5e9; /* xanh lá nhạt */
+  color: #2e7d32; /* xanh lá đậm */
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
 }
+
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
-}
-.btn-sm {
-  padding: 4px 8px;
-  font-size: 0.875rem;
+  background-color: #f4faf5; /* sắc xanh dịu */
 }
 
+/* Badge */
 .badge {
   font-size: 0.875em;
   padding: 0.5em 0.75em;
+  border-radius: 6px;
 }
 
+/* giữ màu bootstrap đúng ý nghĩa: */
 .text-danger {
-  color: #dc3545 !important;
+  color: #dc3545 !important; /* quá hạn */
 }
 
 .text-warning {
-  color: #ffc107 !important;
+  color: #f57c00 !important; /* sắp quá hạn */
 }
 
 .text-info {
-  color: #17a2b8 !important;
+  color: #2e7d32 !important; /* info chuyển sang xanh lá */
 }
 
 .fw-bold {
   font-weight: 700 !important;
 }
 
+/* BTN xanh lá */
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #43a047;
+  opacity: 0.9;
+}
+
+/* Modal re-style */
 .modal-content {
   border-radius: 12px;
   border: none;

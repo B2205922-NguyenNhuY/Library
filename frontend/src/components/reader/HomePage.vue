@@ -133,14 +133,20 @@ export default {
 .card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #b3e5fc;
-  box-shadow: 0 4px 12px rgba(79, 195, 247, 0.06);
+
+  /* Viền xanh lá nhạt */
+  border: 1px solid #C8E6C9;
+
+  /* Shadow nhẹ màu xanh lá */
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.06);
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(79, 195, 247, 0.25);
+
+  /* Hover đậm hơn */
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.25);
 }
 
 .card-title {
@@ -151,16 +157,18 @@ export default {
 
 .card-text {
   font-size: 1rem;
-  color: #78909c;
+  color: #78909C;
 }
 
+/* Màu title trong section hướng dẫn */
 .guide-section .card-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1976d2;
+  color: #388E3C; /* Xanh lá đậm Material */
 }
 
 .guide-section .fas {
   margin-right: 8px;
+  color: #2E7D32; /* Icon xanh lá */
 }
 </style>

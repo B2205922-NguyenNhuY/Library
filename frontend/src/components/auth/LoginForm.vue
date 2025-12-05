@@ -271,7 +271,7 @@ export default {
 
 .login-background {
   min-height: 100vh;
-  background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+  background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -286,13 +286,13 @@ export default {
   height: 650px;
   background: white;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 123, 191, 0.1);
+  box-shadow: 0 10px 30px rgba(67, 160, 71, 0.15);
   overflow: hidden;
 }
 
 .login-left {
   flex: 1;
-  background: linear-gradient(135deg, #81d4fa 0%, #4fc3f7 100%);
+  background: linear-gradient(135deg, #A5D6A7 0%, #66BB6A 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -327,15 +327,13 @@ export default {
 .login-title h1 {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #37474f;
+  color: #2E7D32;
   margin-bottom: 8px;
 }
 
 .login-title p {
   font-size: 0.95rem;
   color: #78909c;
-  font-weight: 400;
-  margin-bottom: 5px;
 }
 
 .user-type-tabs {
@@ -343,15 +341,15 @@ export default {
   margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #C8E6C9;
 }
 
 .tab-button {
   flex: 1;
   padding: 10px 16px;
   border: none;
-  background: #f5f5f5;
-  color: #546e7a;
+  background: #F1F8E9;
+  color: #2E7D32;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -359,12 +357,12 @@ export default {
 }
 
 .tab-button.active {
-  background: #4fc3f7;
+  background: #43A047;
   color: white;
 }
 
 .tab-button:hover:not(.active) {
-  background: #e0e0e0;
+  background: #E8F5E9;
 }
 
 .login-form {
@@ -373,109 +371,40 @@ export default {
   gap: 12px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
 .form-group label {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #546e7a;
+  color: #2E7D32;
   margin-bottom: 4px;
 }
 
 .required {
-  color: #f44336;
+  color: #d32f2f;
 }
 
 .form-control {
   padding: 10px 12px;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #C8E6C9;
   border-radius: 8px;
   font-size: 0.9rem;
   transition: border-color 0.2s ease;
-  background: #fafafa;
-  color: #37474f;
+  background: #f9fef9;
+  color: #2E7D32;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #4fc3f7;
+  border-color: #43A047;
   background: white;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
-}
-
-.form-control.is-invalid {
-  border-color: #f44336;
-  background: #ffebee;
-}
-
-.form-control::placeholder {
-  color: #a0aec0;
-}
-
-.password-group {
-  position: relative;
-}
-
-.password-input-wrapper {
-  position: relative;
-}
-
-.password-toggle {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: transparent;
-  color: #78909c;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: color 0.2s ease;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
 }
 
 .password-toggle:hover {
-  color: #4fc3f7;
-}
-
-.error-message {
-  font-size: 0.8rem;
-  color: #f44336;
-  margin-top: 4px;
-}
-
-.alert {
-  padding: 15px 20px;
-  border-radius: 10px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  border: none;
-  position: relative;
-}
-
-.alert-error {
-  background: #ffebee;
-  color: #c62828;
-  border-left: 4px solid #ef5350;
-}
-
-.alert-close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  border: none;
-  background: transparent;
-  color: #c62828;
-  font-size: 1.2rem;
-  cursor: pointer;
-  font-weight: bold;
+  color: #43A047;
 }
 
 .btn-login {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -485,38 +414,28 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 8px;
-  box-shadow: 0 2px 8px rgba(79, 195, 247, 0.3);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
   width: 100%;
 }
 
 .btn-login:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(79, 195, 247, 0.4);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.45);
 }
 
-.btn-login:active {
-  transform: translateY(0);
-}
-
-.btn-login:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.register-link {
-  text-align: center;
-  margin-top: 20px;
-  color: #78909c;
-  font-size: 0.95rem;
+.alert-error {
+  background: #FFEBEE;
+  color: #C62828;
+  border-left: 4px solid #E57373;
 }
 
 .register-link a {
-  color: #4fc3f7;
+  color: #43A047;
   font-weight: 600;
   text-decoration: none;
 }
 
 .register-link a:hover {
-  color: #29b6f6;
+  color: #2E7D32;
 }
 </style>

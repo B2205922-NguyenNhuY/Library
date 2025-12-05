@@ -330,7 +330,7 @@ export default {
 }
 
 .form-control:focus + .input-group-text {
-  border-color: #86b7fe;
+  border-color: #66BB6A;
 }
 
 .form-control {
@@ -342,8 +342,8 @@ export default {
 }
 
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.12);
   outline: none;
 }
 
@@ -371,8 +371,9 @@ export default {
   font-style: italic;
 }
 
+/* === BUTTON PRIMARY: GREEN === */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66BB6A 0%, #4CAF50 100%);
   border: none;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -382,7 +383,7 @@ export default {
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #29b6f6 0%, #0288d1 100%);
+  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
   transform: translateY(-1px);
 }
 
@@ -390,4 +391,3 @@ export default {
   opacity: 0.6;
 }
 </style>
----

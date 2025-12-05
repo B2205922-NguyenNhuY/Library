@@ -312,49 +312,65 @@ export default {
 .card:hover {
   transform: translateY(-5px);
 }
+
+/* Modal background */
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* TABLE */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
+
+/* Header table */
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #E8F5E9;
+  color: #2E7D32;
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
 }
+
+/* Table row stripe */
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #F5FAF6;
 }
+
+/* Search input */
 .input-group {
   max-width: 500px;
 }
+
 .input-group-text {
   background-color: white;
   border-left: none;
-  color: #4fc3f7;
+  color: #43A047;
   border-radius: 0 6px 6px 0;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #A5D6A7;
   border-left: 0;
 }
+
 .form-control {
   border-right: none;
   border-radius: 6px 0 0 6px;
   font-size: 0.95rem;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #A5D6A7;
   transition: border-color 0.2s ease;
 }
+
+/* Focus input */
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66BB6A;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
   outline: none;
 }
 .form-control:focus + .input-group-text {
-  border-color: #4fc3f7;
+  border-color: #66BB6A;
 }
+
+/* BADGE COLORS */
 .badge {
   font-size: 0.85em;
   padding: 0.4em 0.6em;
@@ -366,8 +382,8 @@ export default {
   color: #856404;
 }
 .badge.bg-success {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #E8F5E9;
+  color: #2E7D32;
 }
 .badge.bg-danger {
   background-color: #f8d7da;
@@ -381,6 +397,8 @@ export default {
   background-color: #eceff1;
   color: #546e7a;
 }
+
+/* TEXT COLORS */
 .text-danger {
   font-weight: bold;
   color: #dc3545 !important;
@@ -391,15 +409,17 @@ export default {
 }
 .text-success {
   font-weight: bold;
-  color: #198754 !important;
+  color: #2E7D32 !important;
 }
 .text-muted {
   font-size: 0.85em;
   font-style: italic;
   color: #78909c;
 }
+
+/* MAIN BUTTON */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -407,8 +427,10 @@ export default {
   border-radius: 6px;
 }
 .btn-primary:hover {
-  background: #29b6f6;
+  background: #43A047;
 }
+
+/* USER PROFILE CARD */
 .user-profile {
   background-color: #f8f9fa;
   padding: 24px;
@@ -417,35 +439,45 @@ export default {
   max-width: 700px;
   margin: auto;
 }
+
+/* FORM LABEL */
 .profile-details .form-label {
   font-weight: 500;
   color: #37474f;
 }
+
+/* FORM FIELD */
 .profile-details input,
 .profile-details select {
   font-size: 0.95rem;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #A5D6A7;
   transition: border-color 0.2s ease;
 }
 .profile-details input:focus,
 .profile-details select:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.15);
+  border-color: #66BB6A;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
   outline: none;
 }
 .profile-details .form-label .text-danger {
   color: #dc3545;
 }
+
+/* Validation */
 .invalid-feedback {
   display: block;
   font-size: 0.85rem;
 }
+
+/* ALERT */
 .alert-success {
   border-radius: 6px;
   font-size: 0.95rem;
 }
+
+/* Secondary button */
 .btn-secondary {
   background-color: #cfd8dc;
   border: none;

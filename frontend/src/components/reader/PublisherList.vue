@@ -227,25 +227,27 @@ export default {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #e3f2fd;
+  border: 1px solid #E8F5E9;
 }
 
 .info-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.25);
 }
 
+/* Header background */
 .card-header {
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  border-bottom: 1px solid #e1f5fe;
+  background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+  border-bottom: 1px solid #E8F5E9;
   padding: 1rem;
   text-align: center;
 }
 
+/* Icon circle */
 .publisher-icon {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -255,6 +257,7 @@ export default {
   font-size: 1.2rem;
 }
 
+/* Text title */
 .card-title {
   font-size: 1.1rem;
   font-weight: 600;
@@ -263,16 +266,12 @@ export default {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  color: #1565c0;
+  color: #2E7D32;
 }
 
 .small {
   font-size: 0.85rem;
 }
-
-/* .badge {
-  font-size: 0.8rem;
-} */
 
 .card-footer {
   background-color: transparent;
@@ -287,29 +286,30 @@ export default {
 .input-group-text {
   background-color: white;
   border-left: none;
-}
-
-.form-control:focus + .input-group-text {
-  border-color: #86b7fe;
+  color: #43A047;
 }
 
 .form-control {
   border-right: none;
   border-radius: 6px;
-  border: 1px solid #cfd8dc;
+  border: 1px solid #A5D6A7;
   transition: border-color 0.2s ease;
   font-size: 0.95rem;
 }
 
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66BB6A;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
   outline: none;
+}
+
+.form-control:focus + .input-group-text {
+  border-color: #66BB6A;
 }
 
 /* Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
   border: none;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -319,7 +319,7 @@ export default {
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #29b6f6 0%, #0288d1 100%);
+  background: #43A047;
   transform: translateY(-1px);
 }
 
@@ -328,15 +328,17 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Table heading */
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #E8F5E9;
+  color: #2E7D32;
   font-weight: 600;
   vertical-align: middle;
 }
 
+/* Table striped */
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f5faf6;
 }
 
 /* Status Colors */
@@ -352,7 +354,7 @@ export default {
 }
 
 .text-success {
-  color: #2e7d32 !important;
+  color: #2E7D32 !important;
 }
 
 .text-muted {

@@ -718,30 +718,32 @@ export default {
   color: #37474f;
 }
 
-/* Số lượng cảnh báo */
+/* Status Colors */
 .text-danger {
   font-weight: bold;
-  background-color: rgba(244, 67, 54, 0.1); /* đỏ cảnh báo nhẹ */
+  background-color: rgba(244, 67, 54, 0.1);
   color: #d32f2f !important;
 }
+
 .text-warning {
-  background-color: rgba(255, 193, 7, 0.12); /* vàng nhẹ */
+  background-color: rgba(255, 193, 7, 0.12);
   color: #f57c00 !important;
 }
+
 .text-success {
   color: #2e7d32 !important;
 }
 
-/* Mô tả phụ */
+/* Sub text */
 .text-muted {
   font-size: 0.85em;
   font-style: italic;
   color: #78909c;
 }
 
-/* Nút Thêm sách mới */
+/* Primary Button (Xanh lá) */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -750,7 +752,7 @@ export default {
 }
 
 .btn-primary:hover {
-  background: #29b6f6;
+  background: #43a047;
 }
 
 /* Nút nhỏ (sửa, xóa) */
@@ -758,7 +760,7 @@ export default {
   border-radius: 4px;
 }
 
-/* Input & select chung */
+/* Input & Select */
 .form-control,
 .form-select {
   border-radius: 6px;
@@ -769,31 +771,32 @@ export default {
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.3);
   outline: none;
 }
 
-/* Bảng */
+/* Table */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
 
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #e8f5e9;
+  color: #2e7d32;
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f4faf5;
 }
 
-/* Ảnh bìa sách */
+/* Book Image */
 img {
   border-radius: 4px;
   border: 1px solid #e0e0e0;
 }
 </style>
+

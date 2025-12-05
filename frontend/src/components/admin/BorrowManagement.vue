@@ -377,34 +377,44 @@ export default {
 .card:hover {
   transform: translateY(-5px);
 }
+
+/* Modal overlay */
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* Table */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
+
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #e8f5e9;        /* xanh lá nhạt */
+  color: #2e7d32;                    /* xanh đậm */
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
 }
+
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f3faf4;
 }
+
+/* Input Group */
 .input-group {
   max-width: 500px;
 }
+
 .input-group-text {
   background-color: white;
   border-left: none;
-  color: #4fc3f7;
+  color: #43a047;
   border-radius: 0 6px 6px 0;
   border: 1px solid #cfd8dc;
   border-left: 0;
 }
+
 .form-control {
   border-right: none;
   border-radius: 6px 0 0 6px;
@@ -412,20 +422,26 @@ export default {
   border: 1px solid #cfd8dc;
   transition: border-color 0.2s ease;
 }
+
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
   outline: none;
 }
+
 .form-control:focus + .input-group-text {
-  border-color: #4fc3f7;
+  border-color: #66bb6a;
 }
+
+/* Badge status */
 .badge {
   font-size: 0.85em;
   padding: 0.4em 0.6em;
   border-radius: 6px;
   text-transform: capitalize;
 }
+
+/* màu bootstrap giữ nguyên */
 .badge.bg-warning {
   background-color: #fff3cd;
   color: #856404;
@@ -446,6 +462,8 @@ export default {
   background-color: #eceff1;
   color: #546e7a;
 }
+
+/* Text màu */
 .text-danger {
   font-weight: bold;
   color: #dc3545 !important;
@@ -456,22 +474,25 @@ export default {
 }
 .text-success {
   font-weight: bold;
-  color: #198754 !important;
+  color: #2e7d32 !important;
 }
 .text-muted {
   font-size: 0.85em;
   font-style: italic;
   color: #78909c;
 }
+
+/* Button xanh lá */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
   transition: all 0.2s ease;
   border-radius: 6px;
 }
+
 .btn-primary:hover {
-  background: #29b6f6;
+  background: #43a047;
 }
 </style>

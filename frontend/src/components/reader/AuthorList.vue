@@ -218,123 +218,80 @@ export default {
 </script>
 
 <style scoped>
-/* Card Styles */
-.info-card {
-  max-width: 320px;
+.author-card {
+  max-width: 280px;
   margin: 0 auto;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   border-radius: 12px;
-  overflow: hidden;
   border: 1px solid #e3f2fd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.info-card:hover {
+.author-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.3;
-  margin-bottom: 0.5rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  color: #1565c0;
-}
-
-.small {
-  font-size: 0.85rem;
-}
-
-/* .badge {
-  font-size: 0.8rem;
-} */
-
-.card-footer {
-  background-color: transparent;
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-/* Form Styles */
+/* Ô tìm kiếm */
 .input-group {
   max-width: 500px;
 }
 
 .input-group-text {
-  background-color: white;
+  background-color: #ffffff;
   border-left: none;
-}
-
-.form-control:focus + .input-group-text {
-  border-color: #86b7fe;
+  border-radius: 0 6px 6px 0;
+  color: #2e7d32;                 /* icon kính lúp xanh lá */
+  border: 1px solid #c8e6c9;
 }
 
 .form-control {
   border-right: none;
-  border-radius: 6px;
+  border-radius: 6px 0 0 6px;
   border: 1px solid #cfd8dc;
-  transition: border-color 0.2s ease;
   font-size: 0.95rem;
+  transition: border-color 0.2s ease;
 }
 
 .form-control:focus {
-  border-color: #4fc3f7;
-  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.1);
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.15);
   outline: none;
 }
 
-/* Button Styles */
+.form-control:focus + .input-group-text {
+  border-color: #66bb6a;
+}
+
+/* Nút xem danh sách sách – xanh lá */
 .btn-primary {
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
   border: none;
   font-weight: 500;
+  border-radius: 8px;
+  padding: 10px 16px;
   transition: all 0.2s ease;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  padding: 8px 16px;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #29b6f6 0%, #0288d1 100%);
+  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
   transform: translateY(-1px);
 }
 
-/* Modal Styles */
-.modal {
-  background-color: rgba(0, 0, 0, 0.5);
+/* Badge “Số sách” – xanh lá */
+.badge.bg-primary {
+  background-color: #43a047 !important;
+  color: #ffffff !important;
 }
 
-.table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+/* Chữ tiêu đề tác giả */
+.card-title {
+  font-size: 1rem;
   font-weight: 600;
-  vertical-align: middle;
+  color: #1b5e20;
 }
 
-.table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
-}
-
-/* Status Colors */
-.text-danger {
-  font-weight: bold;
-  background-color: rgba(244, 67, 54, 0.1);
-  color: #d32f2f !important;
-}
-
-.text-warning {
-  background-color: rgba(255, 193, 7, 0.12);
-  color: #f57c00 !important;
-}
-
-.text-success {
-  color: #2e7d32 !important;
-}
-
-.text-muted {
-  color: #6c757d !important;
+.small {
+  font-size: 0.85rem;
 }
 </style>

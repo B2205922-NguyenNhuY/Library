@@ -49,9 +49,11 @@ export default {
 * {
   box-sizing: border-box;
 }
+
+/* ==== BACKGROUND ==== */
 .home-background {
   min-height: 100vh;
-  background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 50%, #81d4fa 100%);
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 50%, #A5D6A7 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,6 +63,8 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
+/* ==== WRAPPER ==== */
 .home-container {
   display: flex;
   width: 100%;
@@ -68,56 +72,67 @@ export default {
   min-height: 600px;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 123, 191, 0.15);
+  box-shadow: 0 20px 60px rgba(76, 175, 80, 0.15);
   overflow: hidden;
   position: relative;
   z-index: 2;
 }
+
+/* ==== LEFT CONTENT ==== */
 .home-left {
   flex: 1;
   padding: 50px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #F1F8E9 100%);
 }
+
 .home-content {
   max-width: 500px;
 }
+
+/* ==== TITLE ==== */
 .home-title {
   margin-bottom: 30px;
 }
+
 .home-title h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a237e;
   margin-bottom: 15px;
   line-height: 1.2;
-  background: linear-gradient(135deg, #1a237e 0%, #3f51b5 100%);
+  background: linear-gradient(135deg, #1B5E20 0%, #43A047 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
 .home-subtitle {
   font-size: 1.2rem;
-  color: #546e7a;
+  color: #33691E;
   font-weight: 400;
   margin: 0;
 }
+
+/* ==== DESCRIPTION ==== */
 .home-description {
   margin-bottom: 35px;
 }
 .home-description p {
   font-size: 1rem;
-  color: #607d8b;
+  color: #4E6E4E;
   line-height: 1.6;
   margin: 0;
 }
+
+/* ==== BUTTONS ==== */
 .home-actions {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
 }
+
 .btn-primary,
 .btn-secondary {
   display: inline-flex;
@@ -131,26 +146,37 @@ export default {
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+}
+
+/* Primary button GREEN */
+.btn-primary {
+  background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
   color: white;
 }
+
 .btn-primary:hover {
   transform: translateY(-2px);
   color: white;
+  background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
 }
+
+/* Secondary outline GREEN */
 .btn-secondary {
   background: transparent;
-  color: #4fc3f7;
-  border: 2px solid #4fc3f7;
+  color: #43A047;
+  border: 2px solid #43A047;
 }
+
 .btn-secondary:hover {
-  background: #4fc3f7;
+  background: #43A047;
   color: white;
   transform: translateY(-2px);
 }
+
+/* ==== RIGHT IMAGE ==== */
 .home-right {
   flex: 1;
-  background: linear-gradient(135deg, #81d4fa 0%, #4fc3f7 100%);
+  background: linear-gradient(135deg, #A5D6A7 0%, #66BB6A 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,11 +184,13 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .image-wrapper {
   max-width: 85%;
   z-index: 2;
   position: relative;
 }
+
 .home-image {
   width: 100%;
   height: auto;
@@ -170,3 +198,4 @@ export default {
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
 }
 </style>
+

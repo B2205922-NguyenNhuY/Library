@@ -406,19 +406,21 @@ export default {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Card chung */
 .card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #e3f2fd;
+  border: 1px solid #c8e6c9; /* viền xanh lá nhạt */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
+/* Giữ nguyên màu cảnh báo / lỗi / success theo Bootstrap */
 .card.border-warning {
   border-color: #ffc107 !important;
   border-width: 2px;
@@ -439,6 +441,7 @@ export default {
   border-width: 2px;
 }
 
+/* Icon trên thẻ */
 .icon-wrapper {
   width: 48px;
   height: 48px;
@@ -447,6 +450,8 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
+  background: #e8f5e9;   /* nền icon xanh lá nhạt */
+  color: #2e7d32;        /* icon xanh lá đậm */
 }
 
 .card-title {
@@ -461,32 +466,36 @@ export default {
   font-weight: 500;
 }
 
+/* Header thẻ */
 .card-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
+  background-color: #f1f8e9;              /* xanh lá rất nhạt */
+  border-bottom: 1px solid #c8e6c9;
   padding: 16px 20px;
   border-radius: 12px 12px 0 0;
 }
 
 .card-header h5 {
-  color: #495057;
+  color: #33691e;
   font-weight: 600;
 }
 
+/* Progress */
 .progress {
   height: 8px;
   border-radius: 4px;
-  background-color: #e9ecef;
+  background-color: #e8f5e9;
 }
 
 .progress-bar {
   border-radius: 4px;
+  background-color: #43a047; /* thanh tiến trình xanh lá */
 }
 
 .stat-item {
   font-size: 0.95rem;
 }
 
+/* Nút */
 .btn {
   border-radius: 8px;
   font-weight: 500;
@@ -497,6 +506,7 @@ export default {
   transform: translateY(-2px);
 }
 
+/* Alert */
 .alert {
   border-radius: 10px;
   font-size: 0.95rem;

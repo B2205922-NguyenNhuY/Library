@@ -117,32 +117,36 @@ export default {
 
 <style scoped>
 .custom-navbar {
-  background-color: #29b6f6;
+  background-color: #43A047; /* xanh lá chính */
   padding: 0.8rem 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Link */
 .nav-link {
   color: white !important;
   font-size: 1.05rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
   cursor: pointer;
 }
 
+/* Hover */
 .nav-link:hover {
-  color: #003c8f !important;
+  color: #C8E6C9 !important; /* xanh lá nhạt */
 }
 
+/* Brand logo */
 .navbar-brand {
   font-weight: bold;
   font-size: 1.4rem;
   color: #ffffff !important;
 }
 
+/* Active link */
 .navbar-nav .nav-link.active {
   font-weight: 700;
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid #C8E6C9; /* nhạt để nổi */
   padding-bottom: 2px;
 }
 </style>
