@@ -712,38 +712,43 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Label */
-.form-label {
-  font-weight: 500;
-  color: #37474f;
+.modal-content {
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* Status Colors */
-.text-danger {
-  font-weight: bold;
-  background-color: rgba(244, 67, 54, 0.1);
-  color: #d32f2f !important;
+/* Input Group */
+.input-group {
+  max-width: 400px;
 }
 
-.text-warning {
-  background-color: rgba(255, 193, 7, 0.12);
-  color: #f57c00 !important;
+.input-group-text {
+  background-color: #ffffff;
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  color: #1e88e5; /* xanh biển */
 }
 
-.text-success {
-  color: #2e7d32 !important;
+.form-control {
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  font-size: 0.95rem;
 }
 
-/* Sub text */
-.text-muted {
-  font-size: 0.85em;
-  font-style: italic;
-  color: #78909c;
+/* Focus */
+.form-control:focus {
+  border-color: #42a5f5; /* xanh biển nhạt */
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.25);
+  outline: none;
 }
 
-/* Primary Button (Xanh lá) */
+.form-control:focus + .input-group-text {
+  border-color: #42a5f5;
+}
+
+/* BUTTON */
 .btn-primary {
-  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -752,51 +757,42 @@ export default {
 }
 
 .btn-primary:hover {
-  background: #43a047;
+  background: #1e88e5;
 }
 
-/* Nút nhỏ (sửa, xóa) */
 .btn-sm {
   border-radius: 4px;
 }
 
-/* Input & Select */
-.form-control,
-.form-select {
-  border-radius: 6px;
-  border: 1px solid #cfd8dc;
-  transition: border-color 0.2s ease;
-  font-size: 0.95rem;
-}
-
-.form-control:focus,
-.form-select:focus {
-  border-color: #66bb6a;
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.3);
-  outline: none;
-}
-
-/* Table */
+/* TABLE */
 .table {
   font-size: 0.95rem;
   border-collapse: collapse;
 }
 
 .table thead th {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+  background-color: #e3f2fd; /* xanh nhạt */
+  color: #1565c0; /* xanh đậm */
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f4faf5;
+  background-color: #f0f7ff; /* xanh siêu nhạt */
 }
 
-/* Book Image */
-img {
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
+/* Label */
+.form-label {
+  font-weight: 500;
+  color: #1e3a56; /* xanh đậm hơn */
 }
+
+/* Titles */
+h2,
+.modal-title {
+  color: #1565c0;
+  font-weight: 600;
+}
+
 </style>
 

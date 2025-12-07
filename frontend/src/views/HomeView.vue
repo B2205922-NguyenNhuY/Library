@@ -1,7 +1,6 @@
 <template>
   <div class="home-background">
     <div class="home-container">
-      <!-- ,Left side - Content -->
       <div class="home-left">
         <div class="home-content">
           <div class="home-title">
@@ -29,7 +28,6 @@
           </div>
         </div>
       </div>
-      <!-- Right side - Image/Illustration -->
       <div class="home-right">
         <div class="image-wrapper">
           <img src="../assets/Bibliophile-rafiki.png" class="home-image" />
@@ -50,10 +48,21 @@ export default {
   box-sizing: border-box;
 }
 
+/* === BLUE PALETTE DEFINITIONS === */
+:root {
+  --primary-blue-dark: #1565c0; /* Darker Blue */
+  --primary-blue: #2196f3; /* Main Blue */
+  --primary-blue-light: #64b5f6; /* Light Blue */
+  --background-light: #e3f2fd; /* Very light blue background */
+  --text-dark: #0d47a1; /* Deep blue text */
+  --text-muted: #42a5f5; /* Muted blue text */
+}
+
 /* ==== BACKGROUND ==== */
 .home-background {
   min-height: 100vh;
-  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 50%, #A5D6A7 100%);
+  /* Thay đổi gradient nền sang tông xanh biển */
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,7 +81,8 @@ export default {
   min-height: 600px;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(76, 175, 80, 0.15);
+  /* Thay đổi shadow sang màu xanh biển */
+  box-shadow: 0 20px 60px rgba(33, 150, 243, 0.15);
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -85,7 +95,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(135deg, #ffffff 0%, #F1F8E9 100%);
+  /* Thay đổi gradient nền sang tông xanh biển nhạt */
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
 }
 
 .home-content {
@@ -102,7 +113,8 @@ export default {
   font-weight: 700;
   margin-bottom: 15px;
   line-height: 1.2;
-  background: linear-gradient(135deg, #1B5E20 0%, #43A047 100%);
+  /* Thay đổi gradient text sang tông xanh biển */
+  background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -110,7 +122,8 @@ export default {
 
 .home-subtitle {
   font-size: 1.2rem;
-  color: #33691E;
+  /* Thay đổi màu phụ đề */
+  color: var(--text-dark);
   font-weight: 400;
   margin: 0;
 }
@@ -121,7 +134,8 @@ export default {
 }
 .home-description p {
   font-size: 1rem;
-  color: #4E6E4E;
+  /* Thay đổi màu mô tả */
+  color: #546e7a;
   line-height: 1.6;
   margin: 0;
 }
@@ -148,27 +162,29 @@ export default {
   transition: all 0.3s ease;
 }
 
-/* Primary button GREEN */
+/* Primary button BLUE */
 .btn-primary {
-  background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
+  /* Thay đổi gradient nút primary sang tông xanh biển */
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
   color: white;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
   color: white;
-  background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+  background: linear-gradient(135deg, var(--primary-blue-dark) 0%, #0d47a1 100%);
 }
 
-/* Secondary outline GREEN */
+/* Secondary outline BLUE */
 .btn-secondary {
   background: transparent;
-  color: #43A047;
-  border: 2px solid #43A047;
+  /* Thay đổi màu border và text sang tông xanh biển */
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
 }
 
 .btn-secondary:hover {
-  background: #43A047;
+  background: var(--primary-blue);
   color: white;
   transform: translateY(-2px);
 }
@@ -176,7 +192,8 @@ export default {
 /* ==== RIGHT IMAGE ==== */
 .home-right {
   flex: 1;
-  background: linear-gradient(135deg, #A5D6A7 0%, #66BB6A 100%);
+  /* Thay đổi gradient nền hình ảnh sang tông xanh biển */
+  background: linear-gradient(135deg, var(--primary-blue-light) 0%, var(--primary-blue) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,5 +214,29 @@ export default {
   object-fit: contain;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
 }
-</style>
 
+/* ==== RESPONSIVE DESIGN ==== */
+@media (max-width: 992px) {
+  .home-container {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .home-right {
+    padding: 30px;
+    height: 350px; /* Cố định chiều cao cho màn hình nhỏ */
+  }
+  .home-left {
+    padding: 40px 30px;
+    text-align: center;
+  }
+  .home-content {
+    max-width: 100%;
+  }
+  .home-title h1 {
+    font-size: 2rem;
+  }
+  .home-actions {
+    justify-content: center;
+  }
+}
+</style>

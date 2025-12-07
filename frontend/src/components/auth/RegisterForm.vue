@@ -1,12 +1,29 @@
 <template>
   <div class="register-background">
     <div class="register-box">
-      <!-- Hình ảnh -->
       <div class="register-left">
-        <div class="image-wrapper">
-          <img src="../../assets/Library-rafiki.png" class="register-image" />
+    <transition name="fade" mode="out-in">
+        <div 
+            v-if="currentSlide" 
+            :key="currentSlideIndex" 
+            class="slide-content-wrapper"
+        >
+            <h2 class="welcome-title">{{ currentSlide.title }}</h2>
+            <p class="slide-text">{{ currentSlide.text }}</p>
+            <div class="image-wrapper">
+                <img :src="currentSlide.url" class="register-image" :alt="currentSlide.title" />
+            </div>
+            <div class="slide-indicators">
+                <span
+                    v-for="(slide, index) in slides"
+                    :key="index"
+                    class="dot"
+                    :class="{ active: index === currentSlideIndex }"
+                ></span>
+            </div>
         </div>
-      </div>
+    </transition>
+</div>
 
       <!-- Form đăng ký. -->
       <div class="register-right">
@@ -235,18 +252,61 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { showError, showSuccess } from "@/utils/notifications";
 
+import LibraryAmico from "@/assets/Library-amico.png"; // Ảnh 1 (Ví dụ)
+import BooksCuate from "@/assets/Books-cuate.png";     // Ảnh 2 (Ví dụ)
+import ELearningCuate from "@/assets/E-learning-cuate.png"; // Ảnh 3 (Ví dụ)
 export default {
   name: "RegisterForm",
   components: { LoadingSpinner },
   setup() {
     const store = useStore();
     const router = useRouter();
+
+    const slides = ref([
+        { 
+            url: LibraryAmico, 
+            title: "Trở thành Độc giả của Thư viện số", 
+            text: "Đăng ký nhanh chóng để truy cập vào kho tài liệu khổng lồ." 
+        },
+        { 
+            url: BooksCuate, 
+            title: "Khám phá tri thức không giới hạn", 
+            text: "Hàng ngàn đầu sách thuộc mọi lĩnh vực chờ đợi bạn." 
+        },
+        { 
+            url: ELearningCuate, 
+            title: "Tạo tài khoản học tập tiện lợi", 
+            text: "Quản lý sách đang mượn và lịch sử đọc của bạn." 
+        },
+    ]);
+    const currentSlideIndex = ref(0);
+    let slideInterval = null;
+
+    const currentSlide = computed(() => slides.value[currentSlideIndex.value]);
+
+    const startSlideShow = () => {
+        slideInterval = setInterval(() => {
+            currentSlideIndex.value = (currentSlideIndex.value + 1) % slides.value.length;
+        }, 5000); // 5 giây/slide
+    };
+    
+    // SỬ DỤNG onMounted VÀ onUnmounted
+    onMounted(() => {
+        startSlideShow();
+    });
+
+    onUnmounted(() => {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+        }
+    });
+
     const formData = ref({
       maDocGia: "",
       hoLot: "",
@@ -450,51 +510,83 @@ export default {
       handleSubmit,
       clearError,
       validateField,
+      currentSlide,
+      slides,
+      currentSlideIndex
     };
   },
 };
 </script>
 
 <style scoped>
+/* --- GIAO DIỆN MỚI: XANH NHẠT - VÀNG CAM --- */
 * {
   box-sizing: border-box;
 }
 
-/* ==== BACKGROUND ==== */
+/* 1. Nền & Hộp chính */
 .register-background {
   min-height: 100vh;
-  background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+  /* Nền Xám Xanh Nhạt */
+  background-color: #f0f3f8;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ==== CONTAINER ==== */
 .register-box {
   display: flex;
   width: 100%;
-  max-width: 1200px;
-  height: 650px;
+  max-width: 950px; /* Thu hẹp lại tương tự LoginForm */
+  height: 650px; 
   background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(67, 160, 71, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
-/* ==== LEFT IMAGE ==== */
+/* 2. Phần ảnh & Slide (Gam Xanh/Tím Nhạt) */
 .register-left {
   flex: 1;
-  background: linear-gradient(135deg, #A5D6A7 0%, #66BB6A 100%);
-  display: flex;
+  /* Nền Gradient Xanh/Tím Nhạt - Giống LoginForm */
+  background: linear-gradient(135deg, #e0e7ff 0%, #c3dafe 100%);
+   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 40px;
+  position: relative; /* Quan trọng cho slide */
+}
+
+/* SLIDE CONTENT */
+.slide-content-wrapper {
+    text-align: center;
+    /* Vị trí tuyệt đối cho transition hoạt động */
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.welcome-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3b5998; /* Màu xanh đậm */
+    margin-bottom: 8px;
+}
+
+.slide-text {
+    color: #3b5998;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    opacity: 0.8;
 }
 
 .image-wrapper {
-  max-width: 80%;
+  max-width: 85%;
+   margin: 0 auto;
 }
 
 .register-image {
@@ -503,19 +595,55 @@ export default {
   object-fit: contain;
 }
 
-/* ==== RIGHT FORM ==== */
-.register-right {
-  flex: 1;
-  padding: 25px 35px;
+/* Indicators */
+.slide-indicators {
+  position: absolute;
+   bottom: -50px; /* Điều chỉnh vị trí so với container */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: white;
-  overflow-y: auto;
-  position: relative;
+  justify-content: center;
+   margin-top: 20px;
 }
 
-/* TITLE */
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: #a0aec0; /* Màu xám */
+  border-radius: 50%;
+   margin: 0 5px;
+   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.dot.active {
+  background-color: #3b5998; /* Màu xanh đậm khi active */
+ transform: scale(1.2);
+}
+
+/* Hiệu ứng chuyển cảnh (Fade Transition) */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease; 
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* 3. Phần Form */
+.register-right {
+  flex: 1.1;
+  padding: 25px 50px; /* Tăng padding để form không quá sát lề */
+  display: flex;
+   flex-direction: column;
+  justify-content: flex-start;
+  background: white;
+  overflow-y: auto; /* Giữ scroll cho form dài */
+}
+
 .register-title {
   text-align: center;
   margin-bottom: 20px;
@@ -523,166 +651,171 @@ export default {
 
 .register-title h1 {
   font-size: 1.8rem;
-  font-weight: 600;
-  color: #2E7D32;
-  margin-bottom: 8px;
+  font-weight: 800; 
+  color: #3b5998; /* Màu Xanh Navy Sáng (Giống LoginForm) */
+  margin-bottom: 5px;
 }
 
 .register-title p {
   font-size: 0.95rem;
-  color: #78909c;
-  font-weight: 400;
+  color: #7f8c9a;
 }
 
-/* FORM */
+/* 4. Form Controls */
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px; /* Giãn cách giữa các form-group */
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
+  gap: 15px; /* Giãn cách giữa các cột */
 }
 
 .form-group label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #2E7D32;
+  font-size: 0.9rem;
+  font-weight: 700; 
+  color: #3b5998;
   margin-bottom: 4px;
+  display: block;
 }
 
 .required {
-  color: #d32f2f;
+  color: #f39c12; /* Màu Vàng Cam (Giống LoginForm) */
 }
 
-/* INPUT */
 .form-control {
   padding: 10px 12px;
-  border: 1px solid #C8E6C9;
-  border-radius: 8px;
+  border: 1px solid #dcdfe6;
+   border-radius: 8px;
   font-size: 0.9rem;
-  transition: border-color 0.2s ease;
-  background: #f9fef9;
-  color: #2E7D32;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: white;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #43A047;
-  background: white;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.15);
+  border-color: #c3dafe;
+  box-shadow: 0 0 0 3px rgba(195, 218, 254, 0.4);
 }
 
 .form-control.is-invalid {
-  border-color: #f44336;
-  background: #ffebee;
+  border-color: #e74c3c !important;
 }
 
-/* PLACEHOLDER */
-.form-control::placeholder {
-  color: #9CCC65;
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 5px;
 }
 
-/* PASSWORD ICON */
+/* 5. Mật khẩu - KHẮC PHỤC LỖI CON MẮT (Giống LoginForm) */
+.password-group {
+    position: relative;
+}
+.password-input-wrapper {
+  display: flex; 
+  align-items: center;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+   padding-right: 12px; 
+}
+.password-input-wrapper:focus-within {
+  border-color: #c3dafe;
+  box-shadow: 0 0 0 3px rgba(195, 218, 254, 0.4);
+}
+.password-input-wrapper input {
+    /* Đặt style input bên trong wrapper để loại bỏ border và chỉ lấy padding trái */
+    border: none;
+    padding-right: 0;
+    flex-grow: 1;
+    /* Dùng lại form-control style */
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+.password-input-wrapper input:focus {
+    box-shadow: none;
+}
 .password-toggle {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+   background: none;
   border: none;
-  background: transparent;
-  color: #78909c;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: color 0.2s ease;
+  color: #7f8c9a;
+    font-size: 0.9rem;
+  padding: 0;
 }
-
 .password-toggle:hover {
-  color: #43A047;
+  color: #3b5998;
 }
 
-/* ALERT */
-.alert {
-  padding: 15px 20px;
-  border-radius: 10px;
-  font-weight: 500;
-  margin: 10px 0;
-  border: none;
-  position: relative;
-}
 
-.alert-error {
-  background: #FFEBEE;
-  color: #C62828;
-  border-left: 4px solid #EF5350;
-}
-
-.alert-close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  border: none;
-  background: transparent;
-  color: #c62828;
-  font-size: 1.2rem;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* BUTTON */
+/* 6. Nút Đăng ký (Vàng Cam - Giống nút Đăng nhập) */
 .btn-register {
-  background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
+  /* Màu Nút Vàng Cam Tương Phản */
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
   color: white;
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 8px;
-  box-shadow: 0 2px 8px rgba(67, 160, 71, 0.3);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 15px;
+  box-shadow: 0 8px 15px rgba(243, 156, 18, 0.3);
+  transition: all 0.3s ease;
   width: 100%;
 }
 
 .btn-register:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
-}
-
-.btn-register:active {
-  transform: translateY(0);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(243, 156, 18, 0.5);
 }
 
 .btn-register:disabled {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
 }
 
-/* LOGIN LINK */
+/* 7. Link Đăng nhập (Vàng Cam - Giống LoginForm) */
 .login-link {
   text-align: center;
-  margin-top: 20px;
-  color: #78909c;
+  margin-top: 15px;
   font-size: 0.95rem;
+  color: #7f8c9a;
 }
 
 .login-link a {
-  color: #43A047;
-  font-weight: 600;
-  text-decoration: none;
+  color: #f39c12; /* Link màu Vàng Cam */
+  font-weight: 700;
+   text-decoration: none;
 }
 
 .login-link a:hover {
-  color: #2E7D32;
+  color: #e67e22;
+}
+
+
+/* 8. Responsive Design */
+@media (max-width: 900px) {
+    .register-box {
+        flex-direction: column;
+        height: auto;
+        max-width: 450px;
+    }
+    .register-left {
+        display: none; /* Ẩn slide ảnh trên mobile */
+    }
+    .register-right {
+        padding: 30px;
+    }
+    .form-row {
+        grid-template-columns: 1fr; /* Stack các trường trong form-row */
+        gap: 15px;
+    }
 }
 </style>

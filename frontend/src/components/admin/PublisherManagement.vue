@@ -370,6 +370,7 @@ export default {
 
 <style scoped>
 /* Modal overlay */
+/* Modal overlay */
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -389,7 +390,7 @@ export default {
   background-color: #ffffff;
   border-left: none;
   border-radius: 0 6px 6px 0;
-  color: #2e7d32; /* xanh lá đậm */
+  color: #1565c0; /* xanh biển đậm */
 }
 
 /* Input field */
@@ -400,18 +401,18 @@ export default {
 }
 
 .form-control:focus {
-  border-color: #66bb6a; /* xanh lá primary */
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
+  border-color: #42a5f5; /* xanh biển */
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.3);
   outline: none;
 }
 
 .form-control:focus + .input-group-text {
-  border-color: #66bb6a;
+  border-color: #42a5f5;
 }
 
 /* Button primary */
 .btn-primary {
-  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); /* xanh biển */
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -421,7 +422,7 @@ export default {
 }
 
 .btn-primary:hover {
-  background: #43a047;
+  background: #1e88e5;
 }
 
 /* Button small */
@@ -436,26 +437,27 @@ export default {
 }
 
 .table thead th {
-  background-color: #e8f5e9;  /* nền xanh lá nhạt */
-  color: #2e7d32;             /* text xanh lá */
+  background-color: #e3f2fd; /* nền xanh biển nhạt */
+  color: #1565c0;            /* text xanh biển đậm */
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f4faf5;
+  background-color: #f0f7ff; /* xanh biển siêu nhạt */
 }
 
 /* Label */
 .form-label {
   font-weight: 500;
-  color: #2e7d32; /* xanh lá đậm */
+  color: #1565c0; /* xanh biển đậm */
 }
 
 /* Titles */
 h2,
 .modal-title {
-  color: #2e7d32;
+  color: #1565c0; /* xanh biển */
   font-weight: 600;
 }
+
 </style>

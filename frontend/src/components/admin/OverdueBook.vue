@@ -360,7 +360,7 @@ Thư viện`;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  border: 1px solid #e8f5e9; /* viền xanh lá nhạt */
+  border: 1px solid #e3f2fd; /* viền xanh biển nhạt */
 }
 
 .card:hover {
@@ -375,15 +375,15 @@ Thư viện`;
 }
 
 .table thead th {
-  background-color: #e8f5e9; /* xanh lá nhạt */
-  color: #2e7d32; /* xanh lá đậm */
+  background-color: #e3f2fd; /* xanh biển nhạt */
+  color: #1565c0; /* xanh biển đậm */
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f4faf5; /* sắc xanh dịu */
+  background-color: #f0f7ff; /* xanh biển rất nhẹ */
 }
 
 /* Badge */
@@ -393,24 +393,24 @@ Thư viện`;
   border-radius: 6px;
 }
 
-/* giữ màu bootstrap đúng ý nghĩa: */
+/* Giữ màu Bootstrap gốc */
 .text-danger {
-  color: #dc3545 !important; /* quá hạn */
+  color: #dc3545 !important;
 }
 
 .text-warning {
-  color: #f57c00 !important; /* sắp quá hạn */
+  color: #f57c00 !important;
 }
 
 .text-info {
-  color: #2e7d32 !important; /* info chuyển sang xanh lá */
+  color: #1e88e5 !important; /* xanh biển */
 }
 
 .fw-bold {
   font-weight: 700 !important;
 }
 
-/* BTN xanh lá */
+/* Button xanh biển */
 .btn-sm {
   padding: 4px 8px;
   font-size: 0.875rem;
@@ -418,17 +418,17 @@ Thư viện`;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); /* xanh biển */
   border: none;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: #43a047;
+  background: #1e88e5;
   opacity: 0.9;
 }
 
-/* Modal re-style */
+/* Modal */
 .modal-content {
   border-radius: 12px;
   border: none;
@@ -436,7 +436,7 @@ Thư viện`;
 }
 
 .modal-header {
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #e3f2fd; /* đường kẻ xanh biển nhạt */
   padding: 20px 24px 16px;
 }
 
@@ -445,7 +445,8 @@ Thư viện`;
 }
 
 .modal-footer {
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid #e3f2fd;
   padding: 16px 24px 20px;
 }
+
 </style>

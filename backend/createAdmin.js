@@ -19,7 +19,7 @@ const createAdmin = async () => {
         password: hashedPassword,
         chucVu: "Admin",
         diaChi: "Admin Adress",
-        soDienThoai: "0373163018"
+        soDienThoai: "0912345678"
       });
       await admin.save();
       console.log("Default admin created");

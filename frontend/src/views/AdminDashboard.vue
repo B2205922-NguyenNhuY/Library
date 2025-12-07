@@ -31,7 +31,7 @@
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item me-3">
-              <span class="nav-link text-white fs-6">
+              <span class="nav-link text-white fs-6 user-info">
                 Xin chào, {{ currentUser?.hoTenNV || "Nhân viên" }}
               </span>
             </li>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import BookManagement from "@/components/admin/BookManagement.vue";
@@ -116,10 +116,19 @@ export default {
 </script>
 
 <style scoped>
+/* Định nghĩa biến màu Xanh Navy/Indigo */
+:root {
+  --primary-blue-dark: #1A237E; /* Xanh Indigo đậm (Màu chính) */
+  --primary-blue: #3949AB;     /* Xanh Indigo (Màu nền Navbar) */
+  --primary-blue-light: #C5CAE9; /* Xanh Indigo nhạt (Màu hover/active) */
+}
+
 .custom-navbar {
-  background-color: #43A047; /* xanh lá chính */
+  /* Thay đổi màu nền chính sang Xanh Indigo */
+  background-color: rgb(0, 89, 255); 
   padding: 0.8rem 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Link */
@@ -133,7 +142,8 @@ export default {
 
 /* Hover */
 .nav-link:hover {
-  color: #C8E6C9 !important; /* xanh lá nhạt */
+  /* Màu hover nhạt hơn, dễ đọc trên nền đậm */
+  color: var(--primary-blue-light) !important; 
 }
 
 /* Brand logo */
@@ -146,7 +156,12 @@ export default {
 /* Active link */
 .navbar-nav .nav-link.active {
   font-weight: 700;
-  border-bottom: 2px solid #C8E6C9; /* nhạt để nổi */
+  /* Đường viền dưới màu xanh nhạt nổi bật */
+  border-bottom: 2px solid var(--primary-blue-light); 
   padding-bottom: 2px;
+}
+
+.user-info {
+  opacity: 0.9;
 }
 </style>

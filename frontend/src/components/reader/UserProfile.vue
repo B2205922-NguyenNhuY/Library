@@ -326,8 +326,8 @@ export default {
 
 /* Header table */
 .table thead th {
-  background-color: #E8F5E9;
-  color: #2E7D32;
+  background-color: #E8F1FF; /* xanh biển nhạt */
+  color: #276CEB;            /* xanh biển chính */
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
@@ -335,7 +335,7 @@ export default {
 
 /* Table row stripe */
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #F5FAF6;
+  background-color: #F2F7FF; /* xanh biển nhạt */
 }
 
 /* Search input */
@@ -346,9 +346,9 @@ export default {
 .input-group-text {
   background-color: white;
   border-left: none;
-  color: #43A047;
+  color: #276CEB;            /* xanh biển */
   border-radius: 0 6px 6px 0;
-  border: 1px solid #A5D6A7;
+  border: 1px solid #A5C8FF; /* viền xanh biển nhạt */
   border-left: 0;
 }
 
@@ -356,18 +356,18 @@ export default {
   border-right: none;
   border-radius: 6px 0 0 6px;
   font-size: 0.95rem;
-  border: 1px solid #A5D6A7;
+  border: 1px solid #A5C8FF; /* xanh biển nhạt */
   transition: border-color 0.2s ease;
 }
 
 /* Focus input */
 .form-control:focus {
-  border-color: #66BB6A;
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
+  border-color: #5B8DFD; /* xanh biển đậm */
+  box-shadow: 0 0 0 2px rgba(91, 141, 253, 0.2);
   outline: none;
 }
 .form-control:focus + .input-group-text {
-  border-color: #66BB6A;
+  border-color: #5B8DFD;
 }
 
 /* BADGE COLORS */
@@ -382,8 +382,8 @@ export default {
   color: #856404;
 }
 .badge.bg-success {
-  background-color: #E8F5E9;
-  color: #2E7D32;
+  background-color: #E8F1FF; /* đổi thành xanh biển nhạt */
+  color: #276CEB;            /* xanh biển chính */
 }
 .badge.bg-danger {
   background-color: #f8d7da;
@@ -409,7 +409,7 @@ export default {
 }
 .text-success {
   font-weight: bold;
-  color: #2E7D32 !important;
+  color: #276CEB !important; /* thay thành xanh biển */
 }
 .text-muted {
   font-size: 0.85em;
@@ -419,7 +419,7 @@ export default {
 
 /* MAIN BUTTON */
 .btn-primary {
-  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
+  background: linear-gradient(135deg, #5B8DFD 0%, #276CEB 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -427,7 +427,7 @@ export default {
   border-radius: 6px;
 }
 .btn-primary:hover {
-  background: #43A047;
+  background: #276CEB;
 }
 
 /* USER PROFILE CARD */
@@ -452,13 +452,13 @@ export default {
   font-size: 0.95rem;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #A5D6A7;
+  border: 1px solid #A5C8FF; /* xanh biển */
   transition: border-color 0.2s ease;
 }
 .profile-details input:focus,
 .profile-details select:focus {
-  border-color: #66BB6A;
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
+  border-color: #5B8DFD;
+  box-shadow: 0 0 0 2px rgba(91, 141, 253, 0.2);
   outline: none;
 }
 .profile-details .form-label .text-danger {
@@ -479,13 +479,13 @@ export default {
 
 /* Secondary button */
 .btn-secondary {
-  background-color: #cfd8dc;
+  background-color: #D8E7FF; /* xanh biển nhạt */
   border: none;
   font-weight: 500;
   padding: 8px 16px;
   border-radius: 6px;
 }
 .btn-secondary:hover {
-  background-color: #b0bec5;
+  background-color: #A5C8FF;
 }
 </style>

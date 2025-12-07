@@ -387,18 +387,18 @@ export default {
 .input-group-text {
   background-color: white;
   border-left: none;
-  color: #1976d2;
+  color: #1e88e5; /* xanh biển */
   border: 1px solid #bbdefb;
 }
 
 .input-group .btn {
   border-radius: 0 6px 6px 0;
-  color: #4fc3f7;
-  border-color: #4fc3f7;
+  color: #1e88e5; /* xanh biển */
+  border-color: #1e88e5;
 }
 
 .input-group .btn:hover {
-  background-color: #4fc3f7;
+  background-color: #1e88e5;
   color: white;
 }
 
@@ -414,17 +414,17 @@ export default {
 }
 
 .table thead th {
-  background-color: #e1f5fe;
-  color: #0277bd;
+  background-color: #e3f2fd;  /* xanh dương nhạt */
+  color: #1565c0;             /* xanh dương đậm */
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f8fbfc;
+  background-color: #f1f8ff; /* xanh nhạt */
 }
 
-/* Nút thao tác */
+/* Buttons */
 .btn-sm {
   border-radius: 4px;
 }
@@ -440,14 +440,14 @@ export default {
 }
 
 .btn-info {
-  background-color: #4fc3f7;
-  border-color: #4fc3f7;
+  background-color: #42a5f5;
+  border-color: #42a5f5;
   color: white;
 }
 
 .btn-info:hover {
-  background-color: #29b6f6;
-  border-color: #29b6f6;
+  background-color: #1e88e5;
+  border-color: #1e88e5;
 }
 
 .btn-danger {
@@ -469,16 +469,16 @@ export default {
 
 .modal-title {
   font-weight: 600;
-  color: #0d47a1;
+  color: #1565c0; /* tiêu đề xanh biển đậm */
 }
 
 /* Label */
 .form-label {
-  color: #0d47a1;
+  color: #1565c0;
   font-weight: 500;
 }
 
-/* Eye toggle */
+/* Eye toggle (show/hide password) */
 .position-absolute.btn {
   background-color: transparent;
   border: none;
@@ -495,8 +495,9 @@ export default {
   border-left: 4px solid #f44336;
 }
 
-/* Nút "X" của alert */
+/* Close button */
 .btn-close {
   padding: 0.5rem;
 }
+
 </style>

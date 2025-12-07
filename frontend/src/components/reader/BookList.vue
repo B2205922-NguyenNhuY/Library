@@ -1,32 +1,110 @@
 <template>
-  <div class="book-list">
+  <div class="book-list container py-5">
     <LoadingSpinner :show="loading" />
 
-    <h2>Danh sách sách</h2>
+    <div class="header-section text-center mb-5">
+      <h2 class="display-4 fw-bold text-success mb-2">Kho Sách Điện Tử 📚</h2>
+      <p class="lead text-muted">Khám phá và mượn ngay các đầu sách bạn yêu thích.</p>
+    </div>
 
     <div
       v-if="error"
       class="alert alert-danger alert-dismissible fade show"
       role="alert"
     >
-      {{ error }}
+      <i class="fas fa-exclamation-triangle me-2"></i> {{ error }}
       <button type="button" class="btn-close" @click="clearError"></button>
     </div>
 
-    <!-- Confirmation Modal. -->
+    <div class="row mb-5 justify-content-center">
+      <div class="col-lg-8">
+        <div class="input-group search-box shadow-sm">
+          <input
+            type="text"
+            class="form-control search-input"
+            v-model="searchTerm"
+            placeholder="Tìm kiếm theo tên sách, mã sách, NXB, tác giả..."
+          />
+          <span class="input-group-text search-icon">
+            <i class="fas fa-search text-success"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="col" v-for="book in books" :key="book._id">
+        <div class="card h-100 book-card shadow-sm border-0">
+
+          <div class="card-img-container">
+            <img
+              :src="getBookImage(book)"
+              class="card-img-top book-cover"
+              :alt="'Bìa sách ' + book.tenSach"
+              @error="handleImageError"
+            />
+            <span 
+                class="badge book-count-badge"
+                :class="{
+                    'bg-danger': book.soQuyen === 0,
+                    'bg-warning text-dark': book.soQuyen > 0 && book.soQuyen < 3,
+                    'bg-success': book.soQuyen >= 3,
+                }"
+            >
+                Còn: {{ book.soQuyen }}
+            </span>
+          </div>
+
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title fw-bold text-truncate-2 mb-2" :title="book.tenSach">{{ book.tenSach }}</h5>
+
+            <ul class="list-unstyled book-details mb-3 small">
+                <li><strong>Mã sách:</strong> <span class="text-muted">{{ book.maSach }}</span></li>
+                <li><strong>NXB:</strong> {{ book.maNXB?.tenNXB || "N/A" }}</li>
+                <li><strong>Tác giả:</strong> {{ book.maTacGia?.tenTacGia || "Chưa có" }}</li>
+            </ul>
+
+            <div class="mt-auto">
+                <p class="status-text mb-2" v-if="book.soQuyen < 3">
+                    <i class="fas fa-info-circle me-1" :class="book.soQuyen === 0 ? 'text-danger' : 'text-warning'"></i> 
+                    <small :class="book.soQuyen === 0 ? 'text-danger fw-bold' : 'text-warning fw-bold'">
+                        {{ book.soQuyen === 0 ? "Đã hết sách" : "Chỉ còn vài cuốn!" }}
+                    </small>
+                </p>
+
+                <button
+                    class="btn btn-primary w-100 mt-2"
+                    @click="borrowBook(book._id)"
+                    :disabled="book.soQuyen === 0 || loading"
+                >
+                    <i class="fas fa-shopping-basket me-2"></i>
+                    {{ loading ? "Đang xử lý..." : (book.soQuyen === 0 ? "Hết sách" : "Mượn sách") }}
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="!loading && books.length === 0" class="col-12 text-center py-5">
+        <div class="alert alert-info">
+          <i class="fas fa-exclamation-circle me-2"></i> Không tìm thấy sách phù hợp với từ khóa: <strong>{{ searchTerm }}</strong>
+        </div>
+      </div>
+    </div>
+
     <div class="modal" tabindex="-1" :class="{ 'd-block': showConfirmModal }">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-sm">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Xác nhận mượn sách</h5>
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title">Xác nhận mượn</h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn-close-white"
               @click="closeConfirmModal"
             ></button>
           </div>
           <div class="modal-body">
-            <p>Bạn muốn mượn '{{ selectedBook?.tenSach }}'?</p>
+            <p class="mb-0">Bạn muốn gửi yêu cầu mượn sách **'{{ selectedBook?.tenSach }}'**?</p>
           </div>
           <div class="modal-footer">
             <button
@@ -38,11 +116,11 @@
             </button>
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-success"
               @click="handleConfirmBorrow"
               :disabled="loading"
             >
-              {{ loading ? "Đang xử lý..." : "Mượn sách" }}
+              {{ loading ? "Đang xử lý..." : "Mượn ngay" }}
             </button>
           </div>
         </div>
@@ -50,86 +128,6 @@
     </div>
     <div class="modal-backdrop fade show" v-if="showConfirmModal"></div>
 
-    <!-- Tìm kiếm -->
-    <div class="row mb-4">
-      <div class="col-md-6">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            v-model="searchTerm"
-            placeholder="Tìm kiếm theo tên sách, mã sách, tên NXB, tên tác giả"
-          />
-          <span class="input-group-text">
-            <i class="fas fa-search"></i>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Danh sách sách -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-      <div class="col" v-for="book in books" :key="book._id">
-        <div class="card h-100 book-card">
-          <!-- ẢNH BÌA -->
-          <div class="card-img-container">
-            <img
-              :src="getBookImage(book)"
-              class="card-img-top"
-              alt="Book cover"
-              @error="handleImageError"
-            />
-          </div>
-
-          <!-- THÔNG TIN SÁCH -->
-          <div class="card-body p-3">
-            <h6 class="card-title">{{ book.tenSach }}</h6>
-            <p class="card-text small mb-1">
-              <span class="text-muted">{{ book.maSach }}</span>
-            </p>
-            <p class="card-text small mb-1">
-              <strong>NXB:</strong> {{ book.maNXB?.tenNXB || "N/A" }}
-            </p>
-            <p class="card-text small mb-1">
-              <strong>Năm:</strong> {{ book.namXuatBan }}</p
-            >
-            <p class="card-text small mb-1">
-              <strong>Tác giả:</strong>
-              {{ book.maTacGia?.tenTacGia || "Chưa có" }}
-            </p>
-            <p class="card-text small mb-1">
-              <strong>Nguồn:</strong> {{ book.nguonGoc }}
-            </p>
-            <p class="card-text small mb-2">
-              <strong>Còn:</strong>
-              <span
-                :class="{
-                  'text-danger fw-bold': book.soQuyen === 0,
-                  'text-warning fw-bold': book.soQuyen > 0 && book.soQuyen < 3,
-                  'text-success': book.soQuyen >= 3,
-                }"
-              >
-                {{ book.soQuyen }}
-              </span>
-              <br />
-              <small class="text-muted status-text" v-if="book.soQuyen < 3">
-                {{ book.soQuyen === 0 ? "Hết sách" : "Sắp hết" }}
-              </small>
-            </p>
-          </div>
-
-          <div class="card-footer p-3">
-            <button
-              class="btn btn-primary btn-sm w-100"
-              @click="borrowBook(book._id)"
-              :disabled="book.soQuyen === 0 || loading"
-            >
-              {{ loading ? "Đang xử lý..." : "Mượn sách" }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -151,7 +149,6 @@ export default {
     const showConfirmModal = ref(false);
     const store = useStore();
 
-    // URL backend, ví dụ: http://localhost:5000
     const API_URL = import.meta.env.VITE_API_IMAGE_URL;
 
     const allBooks = computed(() => store.getters["book/allBooks"]);
@@ -183,10 +180,11 @@ export default {
       }
     };
 
-    // 👉 Tính URL ảnh đúng, xử lý cả 2 kiểu imagePath:
-    // "uploads/xxx.webp" hoặc "xxx.webp"
     const getBookImage = (book) => {
       if (book.imagePath) {
+        if (book.imagePath.startsWith("http")) {
+          return book.imagePath;
+        }
         if (book.imagePath.startsWith("uploads/")) {
           return `${API_URL}/${book.imagePath}`;
         }
@@ -214,10 +212,10 @@ export default {
           "borrow/createBorrowRequest",
           selectedBookId.value
         );
-      proxy.$toast.show(
-        "Yêu cầu mượn sách đã được gửi. Vui lòng chờ quản lý duyệt!",
-        "success"
-      );
+        proxy.$toast.show(
+          "Yêu cầu mượn sách đã được gửi. Vui lòng chờ quản lý duyệt!",
+          "success"
+        );
         closeConfirmModal();
         await fetchBooks();
       } catch (error) {
@@ -261,133 +259,159 @@ export default {
 </script>
 
 <style scoped>
+.book-list {
+    min-height: 80vh;
+}
+
+/* HEADER */
+.header-section {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* SEARCH BOX */
+.search-box {
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: white;
+}
+.search-input {
+    border: none;
+    box-shadow: none !important;
+    padding-left: 20px;
+    height: 45px;
+}
+.search-input:focus {
+    border-color: transparent !important;
+}
+.search-icon {
+    background-color: white;
+    border: none;
+    padding-right: 20px;
+}
+
+/* BOOK CARD */
 .book-card {
-  max-width: 280px;
-  margin: 0 auto;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-radius: 8px;
-  overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .book-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(30, 136, 229, 0.25); /* blue shadow */
 }
 
+/* IMAGE WRAPPER */
 .card-img-container {
-  height: 200px;
-  overflow: hidden;
-  background-color: #f8f9fa;
+    height: 250px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    position: relative;
+    border-bottom: 1px solid #eee;
 }
 
-.card-img-top {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.3s ease;
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+.book-card:hover .book-cover {
+    transform: scale(1.08);
 }
 
-.book-card:hover .card-img-top {
-  transform: scale(1.05);
+/* BADGE */
+.book-count-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-weight: 700;
+    background: #1E88E5;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* TITLE */
 .card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #1565C0; /* darker blue */
+    height: 2.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.card-text {
-  line-height: 1.3;
+/* MULTI-LINE TRUNCATE */
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.card-text strong {
-  font-weight: 500;
-  font-size: 0.8rem;
+/* DETAILS */
+.book-details li {
+    margin-bottom: 3px;
+    color: #6c757d;
+}
+.book-details strong {
+    color: #333;
+    font-weight: 600;
+    margin-right: 5px;
+    font-size: 0.85rem;
 }
 
-.small {
-  font-size: 0.85rem;
-}
-
-.card-footer {
-  background-color: transparent;
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.input-group {
-  max-width: 500px;
-}
-
-.input-group-text {
-  background-color: white;
-  border-left: none;
-}
-
-.form-control:focus + .input-group-text {
-  border-color: #66BB6A;
-}
-
-.form-control {
-  border-right: none;
-  border-radius: 6px;
-  border: 1px solid #cfd8dc;
-  transition: border-color 0.2s ease;
-  font-size: 0.95rem;
-}
-
-.form-control:focus {
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.12);
-  outline: none;
+/* STATUS COLORS */
+.status-text {
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .text-danger {
-  font-weight: bold;
-  background-color: rgba(244, 67, 54, 0.1);
-  color: #d32f2f !important;
+    color: #dc3545 !important;
 }
-
 .text-warning {
-  background-color: rgba(255, 193, 7, 0.12);
-  color: #f57c00 !important;
+    color: #ffc107 !important;
 }
-
 .text-success {
-  color: #2e7d32 !important;
+    color: #1E88E5 !important; /* đổi xanh biển */
 }
 
-.text-muted {
-  color: #6c757d !important;
+/* BUTTONS */
+.btn-primary, .btn-success {
+    background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%); /* blue gradient */
+    border: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    padding: 10px 16px;
 }
 
-.status-text {
-  font-size: 0.7rem;
-  font-style: italic;
+.btn-primary:hover:not(:disabled), 
+.btn-success:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); /* darker hover */
+    transform: translateY(-1px);
 }
 
-/* === BUTTON PRIMARY: GREEN === */
-.btn-primary {
-  background: linear-gradient(135deg, #66BB6A 0%, #4CAF50 100%);
-  border: none;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  padding: 8px 16px;
+.btn-primary:disabled, .btn-success:disabled {
+    opacity: 0.6;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-  transform: translateY(-1px);
+/* MODAL */
+.modal-header.bg-success {
+    background-color: #1E88E5 !important; /* blue header */
 }
 
-.btn-primary:disabled {
-  opacity: 0.6;
+.btn-close-white {
+    filter: invert(1);
 }
 </style>
+

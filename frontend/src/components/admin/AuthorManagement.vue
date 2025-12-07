@@ -301,34 +301,72 @@ export default {
       showAddModal.value = true;
     };
     const handleSubmit = async () => {
-      try {
+    errors.value = {};
+    try {
+        // 1. Validation
         const { isValid, errors: validationErrors } = validateAuthorForm(
-          AuthorForm.value
+            AuthorForm.value
         );
         if (!isValid) {
-          errors.value = validationErrors;
-          return;
+            errors.value = validationErrors;
+            return;
         }
+
+        // 2. Thêm mới hoặc Cập nhật
         if (editingAuthor.value) {
-          await store.dispatch("author/updateAuthor", {
-            id: editingAuthor.value._id,
-            authorData: AuthorForm.value,
-          });
-          Proxy.$toast.show("Cập nhật tác giả thành công", "success");
+            await store.dispatch("author/updateAuthor", {
+                id: editingAuthor.value._id,
+                authorData: AuthorForm.value,
+            });
+            // Đã loại bỏ: Proxy.$toast.show("Cập nhật tác giả thành công", "success");
         } else {
-          const response = await store.dispatch(
-            "author/createAuthor",
-            AuthorForm.value
-          );
-          console.log("Response from createAuthor:", response); // Log để kiểm tra
-          Proxy.$toast.show("Thêm tác giả thành công", "success");
+            const response = await store.dispatch(
+                "author/createAuthor",
+                AuthorForm.value
+            );
+            console.log("Response from createAuthor:", response); // Giữ lại log để kiểm tra
+            // Đã loại bỏ: Proxy.$toast.show("Thêm tác giả thành công", "success");
         }
+
+        // 3. Thực hiện hành động sau thành công
         await fetchAuthors();
         closeModal();
-      } catch (err) {
-        console.error("Error details:", err.response?.data || err.message); // Log lỗi chi tiết
-        showError("Lỗi khi lưu tác giả: " + err.message);
-      }
+    } catch (err) {
+        console.error("Error details:", err.response?.data || err.message);
+
+        let errorMessage =
+            "Lỗi khi lưu tác giả: " + (err.message || "Đã xảy ra lỗi.");
+
+        // >> XỬ LÝ LỖI DUPLICATE KEY (E11000) << (Giữ lại logic xử lý lỗi chi tiết)
+        if (
+            err.response?.data?.message &&
+            err.response.data.message.includes("E11000 duplicate key")
+        ) {
+            const match =
+                err.response.data.message.match(
+                    /dup key: \{ maTacGia: \"(.*?)\" \}/
+                );
+            const dupMaTacGia = match
+                ? match[1]
+                : AuthorForm.value.maTacGia;
+
+            // Phân biệt thông báo lỗi giữa Thêm mới và Cập nhật
+            if (editingAuthor.value) {
+                errorMessage = `Lỗi cập nhật: Mã tác giả "${dupMaTacGia}" đã được sử dụng bởi tác giả khác. Vui lòng giữ nguyên mã cũ hoặc nhập mã mới chưa có.`;
+            } else {
+                errorMessage = `Lỗi thêm mới: Mã tác giả "${dupMaTacGia}" đã tồn tại. Vui lòng nhập mã khác.`;
+            }
+
+            // Đánh dấu lỗi lên trường maTacGia
+            errors.value.maTacGia = `Mã tác giả này đã tồn tại.`;
+
+        } else if (err.message) {
+            errorMessage = "Lỗi khi lưu tác giả: " + err.message;
+        }
+
+        // Hiển thị thông báo lỗi cuối cùng
+        showError(errorMessage);
+    }
     };
     const clearError = () => {
       store.commit("author/SET_ERROR", null);
@@ -378,7 +416,7 @@ export default {
   background-color: #ffffff;
   border-left: none;
   border-radius: 0 6px 6px 0;
-  color: #43a047; /* icon xanh lá */
+  color: #1976d2; /* icon xanh dương */
 }
 
 .form-control {
@@ -389,18 +427,18 @@ export default {
 
 /* Focus */
 .form-control:focus {
-  border-color: #66bb6a;
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.15);
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.3);
   outline: none;
 }
 
 .form-control:focus + .input-group-text {
-  border-color: #66bb6a;
+  border-color: #42a5f5;
 }
 
 /* BUTTON */
 .btn-primary {
-  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -409,7 +447,7 @@ export default {
 }
 
 .btn-primary:hover {
-  background: #43a047;
+  background: #1e88e5;
 }
 
 .btn-sm {
@@ -423,14 +461,14 @@ export default {
 }
 
 .table thead th {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+  background-color: #e3f2fd;
+  color: #1565c0;
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f3faf4;
+  background-color: #f5faff;
 }
 
 /* Label */
@@ -442,7 +480,8 @@ export default {
 /* Titles */
 h2,
 .modal-title {
-  color: #2e7d32;
+  color: #1565c0;
   font-weight: 600;
 }
+
 </style>

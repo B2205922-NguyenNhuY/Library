@@ -4,23 +4,21 @@
 
     <h2 class="mb-4">Tổng quan thư viện</h2>
 
-    <!-- Error Alert -->.
     <div v-if="error" class="alert alert-danger alert-dismissible fade show">
       {{ error }}
       <button type="button" class="btn-close" @click="clearError"></button>
     </div>
 
-    <!-- Thống kê cơ bản -->
     <div class="row mb-5">
       <div class="col-md-3">
         <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <div class="icon-wrapper bg-success bg-opacity-10 me-3">
-                <i class="fas fa-book text-success"></i>
+              <div class="icon-wrapper primary-blue-bg me-3">
+                <i class="fas fa-book text-white"></i>
               </div>
               <div>
-                <h3 class="card-title text-success mb-0">{{ totalBooks }}</h3>
+                <h3 class="card-title text-primary mb-0">{{ totalBooks }}</h3>
                 <p class="card-text mb-0">Tổng số sách</p>
               </div>
             </div>
@@ -31,11 +29,11 @@
         <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <div class="icon-wrapper bg-warning bg-opacity-10 me-3">
-                <i class="fas fa-user-edit text-warning"></i>
+              <div class="icon-wrapper secondary-blue-bg me-3">
+                <i class="fas fa-user-edit text-white"></i>
               </div>
               <div>
-                <h3 class="card-title text-warning mb-0">{{ totalAuthors }}</h3>
+                <h3 class="card-title text-secondary mb-0">{{ totalAuthors }}</h3>
                 <p class="card-text mb-0">Tổng số tác giả</p>
               </div>
             </div>
@@ -46,11 +44,11 @@
         <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <div class="icon-wrapper bg-primary bg-opacity-10 me-3">
-                <i class="fas fa-building text-primary"></i>
+              <div class="icon-wrapper tertiary-blue-bg me-3">
+                <i class="fas fa-building text-white"></i>
               </div>
               <div>
-                <h3 class="card-title text-primary mb-0">
+                <h3 class="card-title text-info mb-0">
                   {{ totalPublishers }}
                 </h3>
                 <p class="card-text mb-0">Nhà xuất bản</p>
@@ -63,11 +61,11 @@
         <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <div class="icon-wrapper bg-info bg-opacity-10 me-3">
-                <i class="fas fa-hand-holding text-info"></i>
+              <div class="icon-wrapper fourth-blue-bg me-3">
+                <i class="fas fa-hand-holding text-white"></i>
               </div>
               <div>
-                <h3 class="card-title text-info mb-0">
+                <h3 class="card-title text-success mb-0">
                   {{ totalBorrowedBooks }}
                 </h3>
                 <p class="card-text mb-0">Đang được mượn</p>
@@ -78,7 +76,6 @@
       </div>
     </div>
 
-    <!-- Thống kê phạt và quá hạn -->
     <h3 class="mb-3">Thống kê mượn trả</h3>
     <div class="row mb-5">
       <div class="col-md-3">
@@ -155,7 +152,6 @@
       </div>
     </div>
 
-    <!-- Biểu đồ tỷ lệ trả đúng hạn -->
     <div class="row mb-4">
       <div class="col-md-6">
         <div class="card">
@@ -166,14 +162,14 @@
             <div class="progress-container">
               <div class="progress-item">
                 <div class="d-flex justify-content-between">
-                  <span class="text-success">Trả đúng hạn</span>
-                  <span class="fw-bold text-success"
+                  <span class="text-primary">Trả đúng hạn</span>
+                  <span class="fw-bold text-primary"
                     >{{ onTimeReturnRate }}%</span
                   >
                 </div>
                 <div class="progress mt-1">
                   <div
-                    class="progress-bar bg-success"
+                    class="progress-bar bg-primary"
                     :style="{ width: onTimeReturnRate + '%' }"
                   ></div>
                 </div>
@@ -233,7 +229,6 @@
       </div>
     </div>
 
-    <!-- Thêm phần này để hiển thị danh sách sách quá hạn -->
     <div class="mt-5">
       <h3 class="mb-3">Danh sách sách đang quá hạn</h3>
       <OverdueBook />
@@ -242,6 +237,7 @@
 </template>
 
 <script>
+// ... (Phần script giữ nguyên như ban đầu)
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
@@ -401,16 +397,33 @@ export default {
 </script>
 
 <style scoped>
-.admin-home-page {
-  padding: 20px 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+/* Định nghĩa biến màu Xanh Navy/Indigo (Đồng bộ với AdminDashboard) */
+:root {
+  --primary-blue-dark: #1A237E; /* Xanh Indigo đậm (cho text/header) */
+  --primary-blue: #3949AB;     /* Xanh Indigo (cho card, progress) */
+  --primary-blue-light: #C5CAE9; /* Xanh Indigo nhạt (cho nền/viền card) */
+  --primary-blue-text: #1976D2; /* Xanh tươi hơn cho tiêu đề thống kê */
 }
+
+/* Các màu phụ cho các ô thống kê */
+.primary-blue-bg { background-color: var(--primary-blue) !important; }
+.secondary-blue-bg { background-color: #64B5F6 !important; } /* Light Blue */
+.tertiary-blue-bg { background-color: #00BCD4 !important; } /* Cyan */
+.fourth-blue-bg { background-color: #4DB6AC !important; } /* Teal */
+
+/* Điều chỉnh màu sắc trong template */
+.text-primary { color: var(--primary-blue-text) !important; }
+.text-secondary { color: #64B5F6 !important; }
+.text-info { color: #00BCD4 !important; }
+.text-success { color: #4DB6AC !important; } /* Giữ xanh tươi hơn cho sách mượn */
+.bg-primary { background-color: var(--primary-blue-text) !important; }
 
 /* Card chung */
 .card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #c8e6c9; /* viền xanh lá nhạt */
+  /* Viền card nhạt */
+  border: 1px solid var(--primary-blue-light); 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
@@ -418,27 +431,6 @@ export default {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-/* Giữ nguyên màu cảnh báo / lỗi / success theo Bootstrap */
-.card.border-warning {
-  border-color: #ffc107 !important;
-  border-width: 2px;
-}
-
-.card.border-danger {
-  border-color: #dc3545 !important;
-  border-width: 2px;
-}
-
-.card.border-success {
-  border-color: #198754 !important;
-  border-width: 2px;
-}
-
-.card.border-secondary {
-  border-color: #6c757d !important;
-  border-width: 2px;
 }
 
 /* Icon trên thẻ */
@@ -450,8 +442,9 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  background: #e8f5e9;   /* nền icon xanh lá nhạt */
-  color: #2e7d32;        /* icon xanh lá đậm */
+  /* Giữ màu nền icon là màu trắng/màu nhạt tùy theo style mới */
+  /* Thay đổi: Đặt màu nền bằng class CSS để dùng các sắc thái xanh khác nhau */
+  /* Màu chữ icon được đặt là text-white để nổi bật trên nền đậm */
 }
 
 .card-title {
@@ -468,14 +461,15 @@ export default {
 
 /* Header thẻ */
 .card-header {
-  background-color: #f1f8e9;              /* xanh lá rất nhạt */
-  border-bottom: 1px solid #c8e6c9;
+  /* Xanh Indigo rất nhạt */
+  background-color: #EEF1F8; 
+  border-bottom: 1px solid var(--primary-blue-light);
   padding: 16px 20px;
   border-radius: 12px 12px 0 0;
 }
 
 .card-header h5 {
-  color: #33691e;
+  color: var(--primary-blue-dark); /* Xanh Indigo đậm */
   font-weight: 600;
 }
 
@@ -483,59 +477,30 @@ export default {
 .progress {
   height: 8px;
   border-radius: 4px;
-  background-color: #e8f5e9;
+  background-color: var(--primary-blue-light);
 }
 
 .progress-bar {
   border-radius: 4px;
-  background-color: #43a047; /* thanh tiến trình xanh lá */
+  /* Thanh tiến trình dùng màu xanh chính */
+  background-color: var(--primary-blue) !important; 
 }
 
-.stat-item {
-  font-size: 0.95rem;
-}
-
-/* Nút */
-.btn {
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-/* Alert */
-.alert {
-  border-radius: 10px;
-  font-size: 0.95rem;
-  padding: 12px 16px;
-}
-
+/* Các tiêu đề chính */
 h2 {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #343a40;
+  color: var(--primary-blue-dark); 
   margin-bottom: 30px;
 }
 
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #495057;
+  color: var(--primary-blue-text);
 }
 
-hr {
-  margin: 8px 0;
-  opacity: 0.3;
-}
+/* Các card thống kê giữ nguyên màu danger, warning, success của Bootstrap */
+/* và đã được thêm border để nổi bật */
 
-small {
-  font-size: 0.8rem;
-}
-
-.fw-bold {
-  font-weight: 600 !important;
-}
 </style>

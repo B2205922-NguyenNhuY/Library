@@ -226,12 +226,12 @@ export default {
 /* nút search */
 .input-group .btn {
   border-radius: 0 6px 6px 0;
-  color: #66bb6a;         /* xanh lá */
-  border-color: #66bb6a;
+  color: #1e88e5;         /* xanh biển */
+  border-color: #1e88e5;
 }
 
 .input-group .btn:hover {
-  background-color: #66bb6a;
+  background-color: #1e88e5;
   color: white;
 }
 
@@ -243,14 +243,14 @@ export default {
 }
 
 .table thead th {
-  background-color: #e8f5e9;  /* xanh lá nhạt */
-  color: #2e7d32;             /* xanh lá đậm */
+  background-color: #e3f2fd;  /* xanh dương nhạt */
+  color: #1565c0;             /* xanh dương đậm */
   font-weight: 600;
   vertical-align: middle;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f4faf5;  /* green hơi sáng */
+  background-color: #f1f8ff;  /* xanh rất nhạt */
 }
 
 /* Nút thao tác */
@@ -258,7 +258,7 @@ export default {
   border-radius: 4px;
 }
 
-/* Danger giữ nguyên vì đó là màu cảnh báo */
+/* Danger giữ nguyên vì là màu cảnh báo */
 .btn-danger {
   background-color: #ef5350;
   border-color: #ef5350;
@@ -283,7 +283,7 @@ export default {
 /* Title modal */
 .modal-title {
   font-weight: 600;
-  color: #2e7d32;        /* màu tiêu đề xanh lá */
+  color: #1565c0;        /* màu tiêu đề xanh biển */
 }
 
 /* Alert lỗi */

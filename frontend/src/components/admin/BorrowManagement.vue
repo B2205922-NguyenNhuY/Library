@@ -390,15 +390,15 @@ export default {
 }
 
 .table thead th {
-  background-color: #e8f5e9;        /* xanh lá nhạt */
-  color: #2e7d32;                    /* xanh đậm */
+  background-color: #e3f2fd;        /* xanh biển nhạt */
+  color: #1565c0;                    /* xanh biển đậm */
   font-weight: 600;
   vertical-align: middle;
   padding: 12px;
 }
 
 .table-striped > tbody > tr:nth-child(odd) {
-  background-color: #f3faf4;
+  background-color: #f0f7ff; /* xanh rất nhạt */
 }
 
 /* Input Group */
@@ -409,7 +409,7 @@ export default {
 .input-group-text {
   background-color: white;
   border-left: none;
-  color: #43a047;
+  color: #1e88e5; /* xanh biển */
   border-radius: 0 6px 6px 0;
   border: 1px solid #cfd8dc;
   border-left: 0;
@@ -424,16 +424,16 @@ export default {
 }
 
 .form-control:focus {
-  border-color: #66bb6a;
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.2);
+  border-color: #42a5f5; /* xanh biển nhạt */
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2); 
   outline: none;
 }
 
 .form-control:focus + .input-group-text {
-  border-color: #66bb6a;
+  border-color: #42a5f5;
 }
 
-/* Badge status */
+/* Badge status giữ nguyên */
 .badge {
   font-size: 0.85em;
   padding: 0.4em 0.6em;
@@ -441,7 +441,6 @@ export default {
   text-transform: capitalize;
 }
 
-/* màu bootstrap giữ nguyên */
 .badge.bg-warning {
   background-color: #fff3cd;
   color: #856404;
@@ -474,7 +473,7 @@ export default {
 }
 .text-success {
   font-weight: bold;
-  color: #2e7d32 !important;
+  color: #1565c0 !important; /* xanh biển thay vì xanh lá */
 }
 .text-muted {
   font-size: 0.85em;
@@ -482,9 +481,9 @@ export default {
   color: #78909c;
 }
 
-/* Button xanh lá */
+/* Button xanh biển */
 .btn-primary {
-  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+  background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
   border: none;
   font-weight: 500;
   padding: 8px 16px;
@@ -493,6 +492,7 @@ export default {
 }
 
 .btn-primary:hover {
-  background: #43a047;
+  background: #1e88e5;
 }
+
 </style>

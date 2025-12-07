@@ -1,89 +1,97 @@
 <template>
-  <div class="author-list">
+  <div class="author-list container py-5">
     <LoadingSpinner :show="loading" />
 
-    <h2>Danh sách tác giả</h2>
+    <div class="header-section text-center mb-5">
+      <h2 class="display-4 fw-bold text-primary-blue mb-2">Danh sách Tác giả 🖋️</h2>
+      <p class="lead text-muted">Tìm kiếm thông tin và các đầu sách của tác giả.</p>
+    </div>
 
-    <!-- Error Alert. -->
     <div
       v-if="error"
       class="alert alert-danger alert-dismissible fade show"
       role="alert"
     >
-      {{ error }}
+      <i class="fas fa-exclamation-triangle me-2"></i> {{ error }}
       <button type="button" class="btn-close" @click="clearError"></button>
     </div>
 
-    <!-- Tìm kiếm -->
-    <div class="row mb-4">
-      <div class="col-md-6">
-        <div class="input-group">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-lg-8">
+        <div class="input-group search-box shadow-sm">
           <input
             type="text"
-            class="form-control"
+            class="form-control search-input"
             v-model="searchTerm"
             placeholder="Tìm kiếm tác giả theo tên hoặc mã tác giả"
           />
-          <span class="input-group-text">
-            <i class="fas fa-search"></i>
+          <span class="input-group-text search-icon">
+            <i class="fas fa-search text-primary-blue"></i>
           </span>
         </div>
       </div>
     </div>
 
-    <!-- Danh sách tác giả -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       <div class="col" v-for="author in authors" :key="author._id">
-        <div class="card h-100 info-card">
-          <div class="card-body p-3">
-            <h5 class="card-title">{{ author.tenTacGia }}</h5>
-            <p class="card-text small mb-2">
-              <span class="text-muted">{{ author.maTacGia }}</span>
+        <div class="card h-100 author-card shadow-sm border-0">
+          <div class="card-body d-flex flex-column p-4 text-center">
+            <i class="fas fa-user-edit author-icon mb-3"></i>
+            <h5 class="card-title fw-bold mb-1">{{ author.tenTacGia }}</h5>
+            
+            <p class="card-text small mb-3 text-muted">
+              {{ author.maTacGia }}
             </p>
-            <p class="card-text small mb-2">
-              <strong>Số sách: </strong>
-              <span class="badge bg-primary">{{
-                getAuthorBookCount(author._id)
-              }}</span>
-            </p>
+
+            <div class="mt-auto">
+                <p class="card-text small mb-3">
+                    <strong>Số sách đã xuất bản: </strong>
+                    <span class="badge bg-primary-blue author-book-count">{{
+                      getAuthorBookCount(author._id)
+                    }}</span>
+                </p>
+
+                <button
+                    class="btn btn-primary-blue btn-sm w-100"
+                    @click="showAuthorBooks(author)"
+                >
+                    <i class="fas fa-book me-1"></i>
+                    Xem danh sách sách
+                </button>
+            </div>
           </div>
-          <div class="card-footer p-3">
-            <button
-              class="btn btn-primary btn-sm w-100"
-              @click="showAuthorBooks(author)"
-            >
-              <i class="fas fa-book me-1"></i>
-              Xem danh sách sách
-            </button>
-          </div>
+        </div>
+      </div>
+       <div v-if="!loading && authors.length === 0 && searchTerm" class="col-12 text-center py-5">
+        <div class="alert alert-info">
+          <i class="fas fa-exclamation-circle me-2"></i> Không tìm thấy tác giả nào với từ khóa: <strong>{{ searchTerm }}</strong>
         </div>
       </div>
     </div>
 
-    <!-- Modal xem sách của tác giả -->
     <div class="modal" tabindex="-1" :class="{ 'd-block': showBooksModal }">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header bg-primary-blue text-white">
             <h5 class="modal-title">
-              <i class="fas fa-user-edit me-2"></i>
+              <i class="fas fa-book-open me-2"></i>
               Sách của {{ selectedAuthor?.tenTacGia }}
             </h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn-close-white"
               @click="closeBooksModal"
             ></button>
           </div>
           <div class="modal-body">
             <div class="table-responsive">
-              <table class="table table-striped">
+              <table class="table table-striped table-hover book-table">
                 <thead>
                   <tr>
                     <th>Mã sách</th>
                     <th>Tên sách</th>
                     <th>Nhà xuất bản</th>
-                    <th>Năm xuất bản</th>
+                    <th>Năm XB</th>
                     <th>Số quyển</th>
                     <th>Đơn giá</th>
                   </tr>
@@ -91,7 +99,7 @@
                 <tbody>
                   <tr v-for="book in authorBooks" :key="book._id">
                     <td>{{ book.maSach }}</td>
-                    <td>{{ book.tenSach }}</td>
+                    <td class="book-name-cell">{{ book.tenSach }}</td>
                     <td>{{ book.maNXB?.tenNXB }}</td>
                     <td>{{ book.namXuatBan }}</td>
                     <td>
@@ -105,18 +113,30 @@
                         >{{ book.soQuyen }}</span
                       >
                       <br />
-                      <small class="text-muted" v-if="book.soQuyen < 3">
-                        {{ book.soQuyen === 0 ? "Hết sách" : "Sắp hết sách" }}
+                      <small class="status-modal-text" v-if="book.soQuyen < 3">
+                        {{ book.soQuyen === 0 ? "Hết sách" : "Sắp hết" }}
                       </small>
                     </td>
                     <td>{{ formatCurrency(book.donGia) }}</td>
                   </tr>
                   <tr v-if="authorBooks.length === 0">
-                    <td colspan="6" class="text-center">Không có sách nào</td>
+                    <td colspan="6" class="text-center py-3">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Không có sách nào được tìm thấy của tác giả này.
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-secondary"
+                @click="closeBooksModal"
+              >
+                Đóng
+              </button>
           </div>
         </div>
       </div>
@@ -132,166 +152,195 @@ import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import { showError } from "@/utils/notifications";
 
 export default {
-  name: "AuthorList",
-  components: { LoadingSpinner },
-  setup() {
-    const store = useStore();
-    const searchTerm = ref("");
-    const showBooksModal = ref(false);
-    const selectedAuthor = ref(null);
+  name: "AuthorList",
+  components: { LoadingSpinner },
+  setup() {
+    const store = useStore();
+    const searchTerm = ref("");
+    const showBooksModal = ref(false);
+    const selectedAuthor = ref(null);
 
-    const loading = computed(() => store.getters["author/isLoading"]);
-    const error = computed(() => store.getters["author/error"]);
-    const allAuthors = computed(() => store.getters["author/allAuthors"]);
-    const allBooks = computed(() => store.getters["book/allBooks"]);
+    const loading = computed(() => store.getters["author/isLoading"]);
+    const error = computed(() => store.getters["author/error"]);
+    const allAuthors = computed(() => store.getters["author/allAuthors"]);
+    const allBooks = computed(() => store.getters["book/allBooks"]);
 
-    const authors = computed(() => {
-      if (!searchTerm.value) return allAuthors.value;
-      const search = searchTerm.value.toLowerCase();
-      return allAuthors.value.filter(
-        (author) =>
-          author.tenTacGia.toLowerCase().includes(search) ||
-          author.maTacGia.toLowerCase().includes(search)
-      );
-    });
+    const authors = computed(() => {
+      if (!searchTerm.value) return allAuthors.value;
+      const search = searchTerm.value.toLowerCase();
+      return allAuthors.value.filter(
+        (author) =>
+          author.tenTacGia.toLowerCase().includes(search) ||
+          author.maTacGia.toLowerCase().includes(search)
+      );
+    });
 
-    const authorBooks = computed(() => {
-      if (!selectedAuthor.value) return [];
-      return allBooks.value.filter(
-        (book) => book.maTacGia?._id === selectedAuthor.value._id
-      );
-    });
+    const authorBooks = computed(() => {
+      if (!selectedAuthor.value) return [];
+      return allBooks.value.filter(
+        (book) => book.maTacGia?._id === selectedAuthor.value._id
+      );
+    });
 
-    const getAuthorBookCount = (authorId) => {
-      return allBooks.value.filter((book) => book.maTacGia?._id === authorId)
-        .length;
-    };
+    const getAuthorBookCount = (authorId) => {
+      return allBooks.value.filter((book) => book.maTacGia?._id === authorId)
+        .length;
+    };
 
-    const formatCurrency = (value) => {
-      return new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-      }).format(value);
-    };
+    const formatCurrency = (value) => {
+      return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(value);
+    };
 
-    const showAuthorBooks = (author) => {
-      selectedAuthor.value = author;
-      showBooksModal.value = true;
-    };
+    const showAuthorBooks = (author) => {
+      selectedAuthor.value = author;
+      showBooksModal.value = true;
+    };
 
-    const closeBooksModal = () => {
-      showBooksModal.value = false;
-      selectedAuthor.value = null;
-    };
+    const closeBooksModal = () => {
+      showBooksModal.value = false;
+      selectedAuthor.value = null;
+    };
 
-    const clearError = () => {
-      store.commit("author/SET_ERROR", null);
-    };
+    const clearError = () => {
+      store.commit("author/SET_ERROR", null);
+    };
 
-    onMounted(async () => {
-      try {
-        await Promise.all([
-          store.dispatch("author/fetchAuthors"),
-          store.dispatch("book/fetchBooks"),
-        ]);
-      } catch (err) {
-        showError(err.message);
-      }
-    });
+    onMounted(async () => {
+      try {
+        await Promise.all([
+          store.dispatch("author/fetchAuthors"),
+          store.dispatch("book/fetchBooks"),
+        ]);
+      } catch (err) {
+        showError(err.message);
+      }
+    });
 
-    return {
-      authors,
-      loading,
-      error,
-      searchTerm,
-      showBooksModal,
-      selectedAuthor,
-      authorBooks,
-      showAuthorBooks,
-      closeBooksModal,
-      getAuthorBookCount,
-      formatCurrency,
-      clearError,
-    };
-  },
+    return {
+      authors,
+      loading,
+      error,
+      searchTerm,
+      showBooksModal,
+      selectedAuthor,
+      authorBooks,
+      showAuthorBooks,
+      closeBooksModal,
+      getAuthorBookCount,
+      formatCurrency,
+      clearError,
+    };
+  },
 };
 </script>
 
 <style scoped>
+/* === GENERAL STYLES - BLUE TONE === */
+.text-primary-blue {
+    color: #0d6efd !important; /* Blue Bootstrap Default */
+}
+.bg-primary-blue {
+    background-color: #0d6efd !important;
+}
+
+/* --- HEADER --- */
+.header-section {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* --- SEARCH INPUT --- */
+.search-box {
+    border-radius: 50px; 
+    overflow: hidden;
+    background-color: white;
+}
+.search-input {
+    border: none;
+    box-shadow: none !important;
+    padding-left: 20px;
+    height: 45px;
+}
+.search-icon {
+    background-color: white;
+    border: none;
+    padding-right: 20px;
+}
+
+/* --- AUTHOR CARD --- */
 .author-card {
-  max-width: 280px;
-  margin: 0 auto;
-  border-radius: 12px;
-  border: 1px solid #e3f2fd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e3f2fd;
+    display: flex; /* Dùng flex cho card-body để đảm bảo footer luôn ở dưới */
 }
 
 .author-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(13, 110, 253, 0.2); /* Shadow xanh biển */
 }
 
-/* Ô tìm kiếm */
-.input-group {
-  max-width: 500px;
+.author-icon {
+    font-size: 2.5rem;
+    color: #0d6efd;
+    margin-bottom: 0.5rem;
 }
 
-.input-group-text {
-  background-color: #ffffff;
-  border-left: none;
-  border-radius: 0 6px 6px 0;
-  color: #2e7d32;                 /* icon kính lúp xanh lá */
-  border: 1px solid #c8e6c9;
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0d6efd; 
 }
 
-.form-control {
-  border-right: none;
-  border-radius: 6px 0 0 6px;
-  border: 1px solid #cfd8dc;
-  font-size: 0.95rem;
-  transition: border-color 0.2s ease;
+.author-book-count {
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 50px;
 }
 
-.form-control:focus {
-  border-color: #66bb6a;
-  box-shadow: 0 0 0 2px rgba(102, 187, 106, 0.15);
-  outline: none;
-}
-
-.form-control:focus + .input-group-text {
-  border-color: #66bb6a;
-}
-
-/* Nút xem danh sách sách – xanh lá */
-.btn-primary {
-  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+/* --- BUTTON PRIMARY: BLUE --- */
+.btn-primary-blue {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
   border: none;
-  font-weight: 500;
-  border-radius: 8px;
-  padding: 10px 16px;
+  font-weight: 600;
   transition: all 0.2s ease;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  padding: 10px 16px;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+.btn-primary-blue:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0b5ed7 0%, #0a58ca 100%);
   transform: translateY(-1px);
 }
 
-/* Badge “Số sách” – xanh lá */
-.badge.bg-primary {
-  background-color: #43a047 !important;
-  color: #ffffff !important;
+.btn-primary-blue:disabled {
+  opacity: 0.6;
 }
 
-/* Chữ tiêu đề tác giả */
-.card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1b5e20;
+/* --- MODAL STYLES --- */
+.modal-header.bg-primary-blue {
+    background-color: #0d6efd !important;
 }
-
-.small {
-  font-size: 0.85rem;
+.btn-close-white {
+    filter: invert(1);
+}
+.book-table th {
+    background-color: #f0f8ff; /* Nền xanh nhạt cho header bảng */
+    color: #0d6efd;
+}
+.book-name-cell {
+    max-width: 250px; /* Giới hạn chiều rộng cột tên sách */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.status-modal-text {
+    font-size: 0.75rem;
+    font-style: italic;
 }
 </style>
